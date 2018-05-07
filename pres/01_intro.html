@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tutorial: Geocomputation with R</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Jannes Muenchow, Robin Lovelace" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/leaflet/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet/leaflet.js"></script>
+    <link href="libs/leafletfix/leafletfix.css" rel="stylesheet" />
+    <script src="libs/Proj4Leaflet/proj4-compressed.js"></script>
+    <script src="libs/Proj4Leaflet/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding/leaflet.js"></script>
+    <script src="libs/leaflet-providers/leaflet-providers.js"></script>
+    <script src="libs/leaflet-providers-plugin/leaflet-providers-plugin.js"></script>
+    <link rel="stylesheet" href="raw\xaringan\my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Tutorial: Geocomputation with R
+### Jannes Muenchow, Robin Lovelace
+### ERUM Budapest, 2018-05-14
+
+---
+
+
+
+
+
+layout: true
+background-image: url(raw/xaringan/img/r_geocomp_background.png)
+background-size: cover
+
+
+---
+
+# Find the slides and the code
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+https://github.com/jannes-m/erum18_geocompr
+
+---
+
+# Who we are
+
+.pull-left[
+- [Jannes Muenchow](http://www.geographie.uni-jena.de/en/Muenchow.html) - GIScientist from Jena with a special focus on ecology and landsliding; creator of the **RQGIS** package
+- [Robin Lovelace](https://www.robinlovelace.net/) - geographer with a special focus on sustainable transport planning; creator of the **stplanr** package
+- together with [Jakub Nowosad](https://nowosad.github.io/) we are writing:
+&lt;br&gt;
+&lt;br&gt;
+[Geocomputation with R](https://geocompr.robinlovelace.net/)
+]
+
+.pull-right[
+<div id="htmlwidget-68275e552e5cf8005edf" style="width:504px;height:504px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-68275e552e5cf8005edf">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["NASAGIBS.ViirsEarthAtNight2012",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[52,53,49],[-3,23,11],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Robin","Jakub","Jannes"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[49,53],"lng":[-3,23]}},"evals":[],"jsHooks":[]}</script>
+]
+---
+
+# Contents
+
+- copy the readme
+-
+-
+
+---
+
+# What is geocomputation?
+- Geocomputation
+- GIScience
+- Geographic data science
+
+---
+
+# What is a GIS?
+
+A **G**eographic **I**nformation **S**ystem is a system for the analysis, manipulation and visualization of geographical data (Longley, Goodchild, Maguire, and Rhind, 2015).
+Six components of a GIS: software, data, procedures, hardware, people, network
+---
+
+# Spatial data models - vector/raster
+
+--- 
+
+# Vector data 
+
+---
+
+# Raster data 
+
+---
+
+# Attribute operations
+
+---  
+
+# Spatial operations
+
+---
+
+# Geometric operations
+
+# References
+Longley, Paul, Michael Goodchild, David Maguire, et al. (2015).
+_Geographic Information Science &amp; Systems_. Fourth edition.
+Hoboken, NJ: Wiley. 477 pp. ISBN: 978-1-118-67695-0.
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"ratio": "4:3",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
