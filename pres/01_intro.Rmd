@@ -1,0 +1,118 @@
+---
+title: "Tutorial: Geocomputation with R"
+# subtitle: "⚔<br/>with xaringan"
+author: "Jannes Muenchow, Robin Lovelace"
+date: "ERUM Budapest, 2018-05-14"
+output:
+  xaringan::moon_reader:
+    css: "raw/xaringan/my-theme.css"
+    seal: true
+    lib_dir: libs
+    nature:
+#      highlightStyle: dracula
+      highlightLines: true
+      ratio: '4:3'
+      countIncrementalSlides: false
+---
+
+
+```{r setup, include = FALSE}
+options(htmltools.dir.version = FALSE)
+library(RefManageR)
+BibOptions(check.entries = FALSE, 
+           bib.style = "authoryear", 
+           cite.style = 'alphabetic', 
+           style = "markdown",
+           first.inits = FALSE,
+           hyperlink = FALSE, 
+           dashed = FALSE)
+my_bib = ReadBib("references.bib", check = FALSE)
+```
+
+layout: true
+background-image: url(raw/xaringan/img/r_geocomp_background.png)
+background-size: cover
+
+
+---
+
+# Find the slides and the code
+<br>
+<br>
+<br>
+<br>
+https://github.com/jannes-m/erum18_geocompr
+
+---
+
+# Who we are
+
+.pull-left[
+- [Jannes Muenchow](http://www.geographie.uni-jena.de/en/Muenchow.html) - GIScientist from Jena with a special focus on ecology and landsliding; creator of the **RQGIS** package
+- [Robin Lovelace](https://www.robinlovelace.net/) - geographer with a special focus on sustainable transport planning; creator of the **stplanr** package
+- together with [Jakub Nowosad](https://nowosad.github.io/) we are writing:
+<br>
+<br>
+[Geocomputation with R](https://geocompr.robinlovelace.net/)
+]
+
+.pull-right[
+```{r, echo = FALSE}
+library(leaflet)
+popup = c("Robin", "Jakub", "Jannes")
+leaflet() %>%
+  addProviderTiles("NASAGIBS.ViirsEarthAtNight2012") %>%
+  addMarkers(lng = c(-3, 23, 11),
+             lat = c(52, 53, 49), 
+             popup = popup)
+```
+]
+---
+
+# Contents
+
+- copy the readme
+-
+-
+
+---
+
+# What is geocomputation?
+- Geocomputation
+- GIScience
+- Geographic data science
+
+---
+
+# What is a GIS?
+
+A **G**eographic **I**nformation **S**ystem is a system for the analysis, manipulation and visualization of geographical data `r Citep(my_bib, "longley_geographic_2015a", .opts = list(cite.style = "authoryear"))`.
+Six components of a GIS: software, data, procedures, hardware, people, network
+---
+
+# Spatial data models - vector/raster
+
+--- 
+
+# Vector data 
+
+---
+
+# Raster data 
+
+---
+
+# Attribute operations
+
+---  
+
+# Spatial operations
+
+---
+
+# Geometric operations
+
+# References
+```{r, 'refs', results="asis", echo=FALSE}
+PrintBibliography(my_bib)
+```
