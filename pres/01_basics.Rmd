@@ -1,6 +1,6 @@
 ---
 title: "Tutorial: Geocomputation with R"
-# subtitle: "⚔<br/>with xaringan"
+subtitle: "⚔<br/>The basics"
 author: "Jannes Muenchow, Robin Lovelace"
 date: "ERUM Budapest, 2018-05-14"
 output:
@@ -44,19 +44,54 @@ background-size: cover
 https://github.com/jannes-m/erum18_geocompr
 
 ---
-
+layout: false
 # Contents
 
-- copy the readme
--
--
+```{r, eval=FALSE, echo=FALSE}
+library(sf)
+library(spData)
+world_laea = st_transform(world, 
+                          crs = "+proj=laea +x_0=0 +y_0=0 +lon_0=-77 +lat_0=39")
+gr = st_graticule(ndiscr = 1000) %>%
+  st_transform("+proj=laea +y_0=0 +lon_0=-77 +lat_0=39 +ellps=WGS84 +no_defs")
+png(filename = "pres/img/globe.png")
+plot(gr$geometry, col = "lightgray", lwd = 3)
+plot(world_laea$geom, bg = "white", col = "lightgray", add = TRUE)
+dev.off()
+```
+
+<figure>
+<img align="right" src="img/globe.png" width = "60%", height = "60%"/>
+</figure>
+
+
+1. Basics
+--
+
+1. Spatial operations
+--
+
+3. Visualization
+--
+
+4. Bridges to GIS
+--
+
+5. Spatial statistical learning
 ---
 
 # Who we are
 
-.pull-left[
+<figure>
+<img align="right" src="img/globe.png" width = "60%", height = "60%"/>
+</figure>
+
 - [Jannes Muenchow](http://www.geographie.uni-jena.de/en/Muenchow.html) - GIScientist from Jena with a special focus on ecology and landsliding; creator of the **RQGIS** package
+--
+
 - [Robin Lovelace](https://www.robinlovelace.net/) - geographer with a special focus on sustainable transport planning; creator of the **stplanr** package
+--
+
 - together with [Jakub Nowosad](https://nowosad.github.io/) we are writing:
 <br>
 <br>
@@ -64,23 +99,15 @@ https://github.com/jannes-m/erum18_geocompr
 <b>
 <font size = "6">
 [Geocomputation with R](https://geocompr.robinlovelace.net/)
-]
+---
 
-.pull-right[
-```{r, echo = FALSE, message=FALSE}
-library(sf)
-library(spData)
-world_laea = st_transform(world, 
-                          crs = "+proj=laea +x_0=0 +y_0=0 +lon_0=-77 +lat_0=39")
-gr = st_graticule(ndiscr = 1000) %>%
-  st_transform("+proj=laea +y_0=0 +lon_0=-77 +lat_0=39 +ellps=WGS84 +no_defs")
-plot(gr$geometry, col = "lightgray", lwd = 3)
-plot(world_laea$geom, bg = "white", col = "lightgray", add = TRUE)
-```
-]
+layout: true
+background-image: url(raw/xaringan/img/r_geocomp_background.png)
+background-size: cover
 ---
 
 # Where we are from
+
 <center>
 ```{r, echo = FALSE}
 library(leaflet)
@@ -95,20 +122,17 @@ leaflet() %>%
 
 # What is a GIS?
 
-.pull-left[
-- A **G**eographic **I**nformation **S**ystem is a system for the analysis, manipulation and visualization of geographical data `r Citep(my_bib, "longley_geographic_2015a", .opts = list(cite.style = "authoryear"))`.
-- Six components of a GIS: software, data, procedures, hardware, people, network
-- Typical GIS software packages: QGIS, SAGA-GIS, GRASS-GIS, ArcMap (commercial)
-]
-
-.pull-right[
-
 <figure>
-<center>
-<img src="img/gis_logos.png" width = "100%", height = "100%"/>
-</center>
+<img align="right" src="img/gis_logos.png" width = "40%", height = "40%"/>
 </figure>
-]
+
+- A **G**eographic **I**nformation **S**ystem is a system for the analysis, manipulation and visualization of geographical data `r Citep(my_bib, "longley_geographic_2015a", .opts = list(cite.style = "authoryear"))`.
+--
+
+- Six components of a GIS: software, data, procedures, hardware, people, network
+--
+
+- Typical GIS software packages: QGIS, SAGA-GIS, GRASS-GIS, ArcMap (commercial)
 
 ???
 Remember R has never been intended to be a GIS though it is great that we can use it as one. Certain spatial operations are not possible. But R has been designed from the beginning as an interface to other languages. And later on, we will see how we can build bridges from R to GIS software.
@@ -119,6 +143,17 @@ Remember R has never been intended to be a GIS though it is great that we can us
 - GIScience
 - Geographic data science
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 Further reading:
 [https://geocompr.robinlovelace.net/intro.html#what-is-geocomputation](https://geocompr.robinlovelace.net/intro.html#what-is-geocomputation)
 
@@ -133,8 +168,14 @@ emphasizing engineering or science, etc.) (Longley et al., 2005)."
 # Geographic data
 
 - Geographic data consists of xy-coordinates and corresponding attributes (this might include a time stamp, otherwise the data is static)
+--
+
 - Usually we neglect the curvature of the Earth when visualizing geographic data
+--
+
 - Geographic data only represent a simplified representation of the world. So we decide what we display for which purpose.
+--
+
 - Two data models for representing geographic data: the vector and the raster data model
 
 ???
@@ -142,14 +183,7 @@ Do not confuse the spatial vector data model with the vectors in R. The two are 
 ---
 
 # Vector data model
-.pull-left[
-- discrete objects represented by points
-- three subtypes: points, lines and polygons
-- especially suitable for objects with well-defined borders (lakes, houses, streets, etc.)
-]
-
-.pull-right[
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=FALSE}
 library("sf")
 p = st_point(c(1.5, 4.5))
 pts = matrix(data = c(1.4, 4.4, 1.5, 4.6, 1.6, 4.4), ncol = 2, byrow = TRUE)
@@ -157,22 +191,121 @@ l = st_linestring(pts)
 pts = matrix(data = c(1.3, 4.3, 1.4, 4.8, 1.6, 4.8, 1.65, 4.3, 1.3, 4.3),
              ncol = 2, byrow = TRUE)
 poly = st_polygon(list(pts))
+png("pres/img/vector.png")
 plot(p, cex = 2, pch = 16, col = "salmon")
 plot(l, add = TRUE, col = "darkblue", lwd = 2)
 plot(poly, add = TRUE)
+dev.off()
 ```
-]
+
+<figure>
+<img align="right" src="img/vector.png" width = "60%", height = "60%"/>
+</figure>
+
+- discrete objects represented by points
+--
+
+- three subtypes: points, lines and polygons
+--
+
+- especially suitable for objects with well-defined borders (lakes, houses, streets, etc.)
+--
+
+- attribute table
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+Further reading: [https://geocompr.robinlovelace.net/spatial-class.html#vector-data](https://geocompr.robinlovelace.net/spatial-class.html#vector-data)
 ---
 
-# Attribute operations
+# Raster data model
+```{r, echo=FALSE, message=FALSE, eval=FALSE}
+library("raster")
+library("grid")
+library("gridExtra")
+library("lattice")
+library("latticeExtra")
 
----  
 
-# Spatial operations
+small_ras = raster(matrix(1:16, 4, 4, byrow = TRUE))
+small_ras_val = raster(matrix(sample.int(100, 16), 4, 4, byrow = TRUE))
+small_ras_val[c(7, 9)] = NA
+
+polys = rasterToPolygons(small_ras, na.rm = FALSE)
+# cell IDs
+p_1 = spplot(small_ras, colorkey = FALSE, col.regions = "white",
+             main = "A. Cell IDs",
+             sp.layout = list(
+               list("sp.polygons", polys, first = FALSE),
+               list("sp.text", xyFromCell(small_ras_val, 1:ncell(small_ras)),
+                    1:ncell(small_ras))
+             )
+)
+# cell values
+p_2 = spplot(small_ras_val, colorkey = FALSE, col.regions = "white",
+             main = "",
+             sp.layout = list(
+               list("sp.polygons", polys, first = FALSE),
+               list("sp.text", xyFromCell(small_ras_val,
+                                          1:ncell(small_ras_val)),
+                    values(small_ras_val))
+             )
+)
+# colored raster
+p_3 = spplot(small_ras_val, 
+             col.regions = 
+               colorRampPalette(c("#a50026", "#ffffbf", "#006837"))(16),
+             colorkey = FALSE)
+png("pres/img/raster.png")
+grid.draw(grobTree(rectGrob(gp = gpar(lwd = 0))))
+grid.draw(arrangeGrob(p_2, p_3, ncol = 1, clip = TRUE))
+dev.off()
+```
+
+<figure>
+<img align="right" src="img/raster.png" width = "50%", height = "50%"/>
+</figure>
+
+- continous fields represented by pixels (cells)
+--
+
+- one attribute for one cell
+--
+
+- especially suitable for continous data without sharp borders (elevation, precipitation)
+--
+
+- structure: raster header (origin, resolution, ncol, nrow, crs, NAvalue) and matrix containing the data
+--
+
+- map algebra
+--
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+further reading: [https://geocompr.robinlovelace.net/spatial-class.html#raster-data](https://geocompr.robinlovelace.net/spatial-class.html#raster-data)
 
 ---
 
-# Geometric operations
+# Raster header
+<center>
+<figure>
+<img src="img/raster_header.png" width = "100%", height = "100%"/>
+</figure>
+---
+
+# R spatial history
+
+
 
 # References
 ```{r, 'refs', results="asis", echo=FALSE}
