@@ -15,7 +15,6 @@ output:
       countIncrementalSlides: false
 ---
 
-
 ```{r setup, include = FALSE}
 options(htmltools.dir.version = FALSE)
 library(RefManageR)
@@ -33,7 +32,6 @@ layout: true
 background-image: url(raw/xaringan/img/r_geocomp_background.png)
 background-size: cover
 
-
 ---
 
 # Find the slides and the code
@@ -44,19 +42,198 @@ background-size: cover
 https://github.com/jannes-m/erum18_geocompr
 
 ---
+# Simple features in R
+Simple feature access is a widely used [ISO standard](http://www.opengeospatial.org/standards/sfa).
+--
+
+```{r}
+library("sf")
+```
+
+**sf** automatically links to [GEOS](https://trac.osgeo.org/geos/), [GDAL](http://www.gdal.org/), [Proj.4](https://proj4.org/), [liblwgeom](https://github.com/postgis/postgis/tree/svn-trunk/liblwgeom).
+
+--
+```{r}
+data(random_points, package = "RQGIS")
+class(random_points)
+```
+--
+
+This is a **`data.frame`**, i.e, an S3 object (as opposed to `SpatialObjects`).
+
+???
+spatial databases, GIS, open source libraries, GeoJSON, GeoSPARQL, etc.
+---
+
+# Simple features in R
+.pull-left[
+```{r, eval=FALSE}
+plot(random_points)
+```
+]
+
+--
+
+.pull-right[
+```{r, echo=FALSE}
+# see issue https://github.com/r-spatial/sf/issues/685
+# -> update random_points!!
+set_bb = function(x) { 
+  class(attr(x[[attr(x, "sf_column")]], "bbox")) = "bbox"
+  x 
+  }
+random_points = set_bb(random_points)
+plot(random_points)
+```
+]
+---
+
+# Simple features in R
+.pull-left[
+```{r, eval=FALSE}
+plot(
+*  st_geometry(random_points),
+  pch = 16, cex = 2,
+  col = "black"
+  bg = "lightblue"
+  )
+```
+]
+
+--
+
+.pull-right[
+```{r, echo=FALSE}
+plot(st_geometry(random_points), pch = 21, cex = 2,
+     col = "black", bg = "lightblue")
+```
+]
+---
+# Simple features in R
+
+```{r, message=FALSE}
+library("dplyr")
+select(random_points, 1:2) %>%
+  head(2)
+```
+
+A few things to note:
+- **sf** works with the **tidyverse**.
+--
+
+- Geometry is **just** another column.
+--
+
+- The geometry column is **sticky**.
+
+---
+Things to note continued:
+- Each observation (row) has a geometry (which can consist of multiple features, think of polygons with holes or multi-part polygons)
+--
+
+- The geometry column is a so-called **list-column**.
+--
+
+- The geometry is build up of **simple** R structures.
+
+---
+
+# Geometries
+
+.pull-left[
+.smaller-code-font75[
+```{r, eval=FALSE}
+# one point (a numeric vector)
+p = st_point(c(1.25, 1.25))
+# one line (a matrix consisting of at least two points)
+mat = matrix(c(1.5, 1.5, 1.7, 1.7),
+             ncol = 2, byrow = TRUE)
+l = st_linestring(mat)
+# one polygon
+mat = matrix(c(1, 1, 1, 2, 2, 2, 2, 1, 1, 1), 
+             ncol = 2, byrow = TRUE)
+# a list of one or more matrices consisting of points
+poly = st_polygon(list(mat))
+# plot it
+plot(poly)
+plot(p, pch = 16, col = "blue", cex = 2, add = TRUE)
+plot(l, cex = 2, col = "orange", lwd = 2, add = TRUE)
+```
+]
+]
+
+--
+
+.pull-right[
+```{r, echo=FALSE}
+# one point (a numeric vector)
+p = st_point(c(1.25, 1.25))
+# one line (a matrix consisting of at least two points)
+l = st_linestring(matrix(c(1.5, 1.5, 1.7, 1.7), ncol = 2, byrow = TRUE))
+# one polygon
+mat = matrix(c(1, 1, 1, 2, 2, 2, 2, 1, 1, 1), ncol = 2, byrow = TRUE)
+# a list of one or more matrices consisting of points
+poly = st_polygon(list(mat))
+# plot it
+plot(poly)
+plot(p, pch = 16, col = "blue", cex = 2, add = TRUE)
+plot(l, cex = 2, col = "orange", lwd = 2, add = TRUE)
+```
+]
+
+--
+
+For more information, refer to `vignette("sf1", package = "sf")` and [https://geocompr.robinlovelace.net/spatial-class.html#vector-data](https://geocompr.robinlovelace.net/spatial-class.html#vector-data)
+
+???
+Package sf puts features in sf tables deriving from data.frame or tbl_df, which have geometries in a list-column of class sfc, where each list element is a single feature’s geometry of class sfg. Feature geometries are represented in R by
+- a numeric vector for a single point (POINT)
+- a numeric matrix (each row a point) for a set of points (MULTIPOINT or LINESTRING)
+- a list of matrices for a set of set of points (MULTIINESTRING, POLYGON)
+- a list of lists of matrices (MULTIPOLYGON)
+- a list of anything mentioned above (GEOMETRYCOLLECTION)
+from: https://edzer.github.io/UseR2017/#a-short-history-of-handling-spatial-data-in-r
+---
+
+# Putting it all together
+**sf** uses three classes to represent simple features in R:
+
+- `sf` is the `data.frame` with the attributes and the list-column
+--
+
+- The list column is of class `sfc`.
+
+```{r} 
+lc = random_points %>%
+st_geometry
+class(lc)
+```
+--
+
+- Each feature of the list column is of class `sfg`.
+
+```{r}
+class(lc[[1]])
+```
+---
 
 # Attribute operations
 
----  
+---
 
 # Spatial operations
 
 ---
 
 # Geometric operations
+
 ---
 
-# References
-```{r, 'refs', results="asis", echo=FALSE}
-PrintBibliography(my_bib)
-```
+# Little exercise
+
+
+---
+
+# Raster data in R
+
+---
