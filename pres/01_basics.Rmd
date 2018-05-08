@@ -318,14 +318,22 @@ further reading: [https://geocompr.robinlovelace.net/spatial-class.html#raster-d
 - R-GIS bridges `r Citep(my_bib, "bivand_using_2000", .opts = list(cite.style = "authoryear"))`
 --
 
-- `r Citet(my_bib, "hornik_approaches_2003", .opts = list(cite.style = "authoryear"))` proposed a spatial data class system for R which eventually led to the packages **rgdal** `r Citep(my_bib, "bivand_rgdal_2018", .opts = list(cite.style = "authoryear"))` and **sp** `r Citep(my_bib, "bivand_applied_2013", .opts = list(cite.style = "authoryear"))`.
+- `r Citet(my_bib, "hornik_approaches_2003", .opts = list(cite.style = "authoryear"))` proposed a spatial data class system for R which eventually led to the packages **rgdal** `r Citep(my_bib, "bivand_rgdal_2018", .opts = list(cite.style = "authoryear"), before = "first released in 2003; ")` and **sp** `r Citep(my_bib, "bivand_applied_2013", .opts = list(cite.style = "authoryear"), before = "first released in 2005; ")`.
 --
 
+- 2008: Applied Spatial Data Analysis with R `r Citep(my_bib, "bivand_applied_2013", .opts = list(cite.style = "authoryear"))`.
+--
 
 - 2010: **raster** package `r Citep(my_bib, "hijmans_raster_2017", .opts = list(cite.style = "authoryear"))`
 --
 
-- 2017-18: **sf** `r Citep(my_bib, "pebesma_sf_2018", .opts = list(cite.style = "authoryear"))` and **stars** `r Citep(my_bib, "pebesma_stars_2018", .opts = list(cite.style = "authoryear"))`
+- 2011: **rgeos** package `r Citep(my_bib, "bivand_rgeos_2017", .opts = list(cite.style = "authoryear"))`
+--
+
+- 2016-17: **sf** - simple features for R `r Citep(my_bib, "pebesma_sf_2018", .opts = list(cite.style = "authoryear"))`
+--
+
+- 2017-18 **stars** - spatiotemporal tidy arrays for R `r Citep(my_bib, "pebesma_stars_2018", .opts = list(cite.style = "authoryear"))`
 
 --
 <br>
