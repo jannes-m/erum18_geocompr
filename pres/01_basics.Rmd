@@ -127,6 +127,7 @@ leaflet() %>%
 </figure>
 
 - A **G**eographic **I**nformation **S**ystem is a system for the analysis, manipulation and visualization of geographical data `r Citep(my_bib, "longley_geographic_2015a", .opts = list(cite.style = "authoryear"))`.
+
 --
 
 - Six components of a GIS: software, data, procedures, hardware, people, network
@@ -167,16 +168,19 @@ emphasizing engineering or science, etc.) (Longley et al., 2005)."
 
 # Geographic data
 
-- Geographic data consists of xy-coordinates and corresponding attributes (this might include a time stamp, otherwise the data is static)
+- Geographic data consists of xy-coordinates and corresponding attributes (this might include a time stamp, otherwise the data is static).
 --
 
-- Usually we neglect the curvature of the Earth when visualizing geographic data
+- Usually we neglect the curvature of the Earth when visualizing geographic data.
 --
 
-- Geographic data only represent a simplified representation of the world. So we decide what we display for which purpose.
+- Geographic data only represents a simplified representation of the world. So we decide what we display for which purpose.
 --
 
-- Two data models for representing geographic data: the vector and the raster data model
+- Geographic data can become quickly big.
+--
+
+- Two data models for representing digitally geographic data: the vector and the raster data model
 
 ???
 Do not confuse the spatial vector data model with the vectors in R. The two are completely different things and in fact unrelated. Though we will see that we use vectors in R to represent the spatial vector data model.
@@ -273,7 +277,7 @@ dev.off()
 - continous fields represented by pixels (cells)
 --
 
-- one attribute for one cell
+- one attribute value for one cell
 --
 
 - especially suitable for continous data without sharp borders (elevation, precipitation)
@@ -303,10 +307,56 @@ further reading: [https://geocompr.robinlovelace.net/spatial-class.html#raster-d
 </figure>
 ---
 
-# R spatial history
+# Brief history of R-spatial
+
+- spatial packages already available in the S language since the 1990s `r Citep(my_bib, "bivand_implementing_2000", .opts = list(cite.style = "authoryear"))`
+--
+
+- By 2000, modifications of these became R packages for point pattern analysis, geostatistics, exploratory spatial data analysis and spatial econometrics.
+--
+
+- R-GIS bridges `r Citep(my_bib, "bivand_using_2000", .opts = list(cite.style = "authoryear"))`
+--
+
+- `r Citet(my_bib, "hornik_approaches_2003", .opts = list(cite.style = "authoryear"))` proposed a spatial data class system for R which eventually led to the packages **rgdal** `r Citep(my_bib, "bivand_rgdal_2018", .opts = list(cite.style = "authoryear"))` and **sp** `r Citep(my_bib, "bivand_applied_2013", .opts = list(cite.style = "authoryear"))`.
+--
 
 
+- 2010: **raster** package `r Citep(my_bib, "hijmans_raster_2017", .opts = list(cite.style = "authoryear"))`
+--
 
+- 2017-18: **sf** `r Citep(my_bib, "pebesma_sf_2018", .opts = list(cite.style = "authoryear"))` and **stars** `r Citep(my_bib, "pebesma_stars_2018", .opts = list(cite.style = "authoryear"))`
+
+--
+<br>
+<br>
+<br>
+Further reading: [https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial](https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial)
+---
+layout: false
+# Recap
+
+<figure>
+<img align="right" src="img/globe.png" width = "60%", height = "60%"/>
+</figure>
+
+- What is a GIS?
+--
+
+- What is Gecomputation?
+--
+
+- Why is geographic data special?
+--
+
+- Difference between the spatial vector and raster data model
+--
+
+- Brief history of R-spatial
+
+
+---
+class: small
 # References
 ```{r, 'refs', results="asis", echo=FALSE}
 PrintBibliography(my_bib)
