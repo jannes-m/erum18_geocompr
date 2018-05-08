@@ -1,0 +1,62 @@
+---
+title: "Tutorial: Geocomputation with R"
+subtitle: "⚔<br>Spatial Operations"
+author: "Jannes Muenchow, Robin Lovelace"
+date: "ERUM Budapest, 2018-05-14"
+output:
+  xaringan::moon_reader:
+    css: "raw/xaringan/my-theme.css"
+    seal: true
+    lib_dir: libs
+    nature:
+#      highlightStyle: dracula
+      highlightLines: true
+      ratio: '4:3'
+      countIncrementalSlides: false
+---
+
+
+```{r setup, include = FALSE}
+options(htmltools.dir.version = FALSE)
+library(RefManageR)
+BibOptions(check.entries = FALSE, 
+           bib.style = "authoryear", 
+           cite.style = 'alphabetic', 
+           style = "markdown",
+           first.inits = FALSE,
+           hyperlink = FALSE, 
+           dashed = FALSE)
+my_bib = ReadBib("references.bib", check = FALSE)
+```
+
+layout: true
+background-image: url(raw/xaringan/img/r_geocomp_background.png)
+background-size: cover
+
+
+---
+
+# Find the slides and the code
+<br>
+<br>
+<br>
+<br>
+https://github.com/jannes-m/erum18_geocompr
+
+---
+
+# Attribute operations
+
+---  
+
+# Spatial operations
+
+---
+
+# Geometric operations
+---
+
+# References
+```{r, 'refs', results="asis", echo=FALSE}
+PrintBibliography(my_bib)
+```
