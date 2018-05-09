@@ -1,6 +1,6 @@
 ---
 title: "Tutorial: Geocomputation with R"
-subtitle: "⚔<br>Spatial Operations"
+subtitle: "⚔<br>Geographic vector data in R"
 author: "Jannes Muenchow, Robin Lovelace"
 date: "ERUM Budapest, 2018-05-14"
 output:
@@ -14,19 +14,6 @@ output:
       ratio: '4:3'
       countIncrementalSlides: false
 ---
-
-```{r setup, include = FALSE}
-options(htmltools.dir.version = FALSE)
-library(RefManageR)
-BibOptions(check.entries = FALSE, 
-           bib.style = "authoryear", 
-           cite.style = 'alphabetic', 
-           style = "markdown",
-           first.inits = FALSE,
-           hyperlink = FALSE, 
-           dashed = FALSE)
-my_bib = ReadBib("references.bib", check = FALSE)
-```
 
 layout: true
 background-image: url(raw/xaringan/img/r_geocomp_background.png)
@@ -419,6 +406,12 @@ Further reading: [https://geocompr.robinlovelace.net/spatial-operations.html#spa
 
 ---
 
+# Your turn
+- Filter the Canterbury region from `nz`, and find all summits of `nz_height` that do not intersect with the Canterbury region (both datasets come with the `spData` package).
+- What happens if we spatially join the elevation column of `nz_height` to `nz`?
+
+---
+
 # Geometric operations
 What if we want the geometric intersection of two overlapping spatial objects instead of a boolean vector?
 --
@@ -485,6 +478,34 @@ regions %>%
 
 # A brief word on CRS
 
+We display spatial data in 2D, i.e., we neglect the curvature of the Earth which leads to distortions.
+We distinguish between:
+
+- geographical Coordinate Reference Systems (CRS) use one specific ellipsoid (WGS84)
+- projected CRS (usually use a specific ellipsoid which is especially suitable for a certain part of the Earth)
+
+**sf** lets you use CRS and change CRS (reproject) through [Proj.4]((https://proj4.org/)).
+--
+
+```{r}
+st_crs(4326)
+```
+---
+<br>
+<br>
+Find out about a projection of a spatial object:
+```{r}
+st_crs(us_states)
+```
+--
+
+Reproject with the help of `st_transform()`:
+
+```{r, eval=FALSE}
+st_transform(us_states, crs = 4326)
+```
+
+Further reading: [https://geocompr.robinlovelace.net/transform.html#reproj-geo-data](https://geocompr.robinlovelace.net/transform.html#reproj-geo-data)
 
 ???
 If one wants to know which position of the Earth we refer to, coordinates of geospatial data require a reference system:
@@ -495,16 +516,13 @@ If one wants to know which position of the Earth we refer to, coordinates of geo
 To handle coordinate reference systems, to convert coordinates (projections) and do datum transformations, Proj.4 is the code base most widely adopted, and actively maintained, by the open source geospatial community.
 
 Package sf has crs objects that register coordinate reference systems:
-
-
 ---
 
 # Geometric operations on vector data
 Further reading: [https://geocompr.robinlovelace.net/transform.html#geo-vec](https://geocompr.robinlovelace.net/transform.html#geo-vec)
+---
 
 # Your turn
-- Filter the Canterbury region from `nz`, and find all summits of `nz_height` that do not intersect with the Canterbury region (both datasets come with the `spData` package).
-- What happens if we spatially join the elevation column of `nz_height` to `nz`?
 - Create two overlapping circles (see below) and compute and plot their geometric intersection. Secondly union the circles.
 ```{r, eval=FALSE}
 pts = st_sfc(st_point(c(0, 1)), st_point(c(1, 1))) # create 2 points
@@ -514,9 +532,4 @@ x = circles[1, ]
 y = circles[2, ]
 ```
 - Compute the average population (`total_pop_15`) for each `REGION` of `us_states`. Plot your result.
-
----
-
-# Raster data in R
-
----
+- Find out about the CRS of `nz`, reproject it into a geographic CRS (EPSG: 4326) and plot the original and unproject `nz` object next to each other.
