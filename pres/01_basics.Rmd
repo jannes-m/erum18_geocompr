@@ -5,7 +5,7 @@ author: "Jannes Muenchow, Robin Lovelace"
 date: "ERUM Budapest, 2018-05-14"
 output:
   xaringan::moon_reader:
-    css: "raw/xaringan/my-theme.css"
+    css: "my-theme.css"
     seal: true
     lib_dir: libs
     nature:
@@ -30,7 +30,7 @@ my_bib = ReadBib("references.bib", check = FALSE)
 ```
 
 layout: true
-background-image: url(raw/xaringan/img/r_geocomp_background.png)
+background-image: url(img/r_geocomp_background.png)
 background-size: cover
 
 
@@ -102,7 +102,7 @@ dev.off()
 ---
 
 layout: true
-background-image: url(raw/xaringan/img/r_geocomp_background.png)
+background-image: url(img/r_geocomp_background.png)
 background-size: cover
 ---
 
