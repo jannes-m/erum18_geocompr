@@ -50,7 +50,7 @@ Simple feature access is a widely used [ISO standard](http://www.opengeospatial.
 library("sf")
 ```
 
-**sf** automatically links to [GEOS](https://trac.osgeo.org/geos/), [GDAL](http://www.gdal.org/), [Proj.4](https://proj4.org/), [liblwgeom](https://github.com/postgis/postgis/tree/svn-trunk/liblwgeom).
+**sf** automatically links to [GEOS](https://trac.osgeo.org/geos/), [GDAL](http://www.gdal.org/) and [Proj.4](https://proj4.org/).
 
 --
 ```{r}
@@ -144,20 +144,25 @@ Things to note continued:
 .smaller-code-font75[
 ```{r, eval=FALSE}
 # one point (a numeric vector)
-p = st_point(c(1.25, 1.25))
-# one line (a matrix consisting of at least two points)
+*p = st_point(c(1.25, 1.25))
+# one line (a matrix consisting of at
+# least two points)
 mat = matrix(c(1.5, 1.5, 1.7, 1.7),
              ncol = 2, byrow = TRUE)
-l = st_linestring(mat)
+*l = st_linestring(mat)
 # one polygon
-mat = matrix(c(1, 1, 1, 2, 2, 2, 2, 1, 1, 1), 
+mat = matrix(c(1, 1, 1, 2, 2, 2, 
+               2, 1, 1, 1), 
              ncol = 2, byrow = TRUE)
-# a list of one or more matrices consisting of points
-poly = st_polygon(list(mat))
+# a list of one or more matrices 
+# consisting of points
+*poly = st_polygon(list(mat))
 # plot it
 plot(poly)
-plot(p, pch = 16, col = "blue", cex = 2, add = TRUE)
-plot(l, cex = 2, col = "orange", lwd = 2, add = TRUE)
+plot(p, pch = 16, col = "blue",  
+     cex = 2, add = TRUE)
+plot(l, cex = 2, col = "orange", 
+     lwd = 2, add = TRUE)
 ```
 ]
 ]
@@ -183,8 +188,6 @@ plot(l, cex = 2, col = "orange", lwd = 2, add = TRUE)
 
 --
 
-For more information, refer to `vignette("sf1", package = "sf")` and [https://geocompr.robinlovelace.net/spatial-class.html#vector-data](https://geocompr.robinlovelace.net/spatial-class.html#vector-data)
-
 ???
 Package sf puts features in sf tables deriving from data.frame or tbl_df, which have geometries in a list-column of class sfc, where each list element is a single feature’s geometry of class sfg. Feature geometries are represented in R by
 - a numeric vector for a single point (POINT)
@@ -193,6 +196,19 @@ Package sf puts features in sf tables deriving from data.frame or tbl_df, which 
 - a list of lists of matrices (MULTIPOLYGON)
 - a list of anything mentioned above (GEOMETRYCOLLECTION)
 from: https://edzer.github.io/UseR2017/#a-short-history-of-handling-spatial-data-in-r
+```{r, eval=FALSE}
+# creating an sf-object manually
+library("sf")
+p = st_point(c(1, 1))
+p_2 = st_point(c(1, 2))
+pts = list(p, p_2)
+pts = st_sfc(pts, crs = 4326)
+pts = st_sf(data.frame("id" = 1:2, "geometry" = pts))
+# or using the "tidy" way
+pts = list(p, p_2) %>%
+  st_sfc(crs = 4326) %>%
+  st_sf(data.frame("id" = 1:2), geometry = .)
+```
 ---
 
 # Putting it all together
@@ -205,7 +221,7 @@ from: https://edzer.github.io/UseR2017/#a-short-history-of-handling-spatial-data
 
 ```{r} 
 lc = random_points %>%
-st_geometry
+  st_geometry
 class(lc)
 ```
 --
@@ -215,14 +231,59 @@ class(lc)
 ```{r}
 class(lc[[1]])
 ```
+--
+
+For more information, refer to `vignette("sf1", package = "sf")` and [https://geocompr.robinlovelace.net/spatial-class.html#vector-data](https://geocompr.robinlovelace.net/spatial-class.html#vector-data)
 ---
 
 # Attribute operations
+- `sf` objects are basically dataframes and thus can be handled like any other R object.
 
+--
+
+```{r}
+dim(random_points)
+```
+--
+
+```{r} 
+str(random_points)
+```
 ---
 
-# Spatial operations
+# Subsetting
 
+```{r}
+# first 2 rows and first 2 columns
+random_points[1:2, 1:2]
+```
+---
+
+# Tidyverse
+- When **dplyr** is also attached to the global environment, a number of generic methods of the tidyverse become available for `sf`-objects, most notably the one-table verbs `select`, `slice`, `filter`, `arrange`, `mutate`, `summarize` (and `group_by`).
+--
+
+- Piped operations are also supported (`%>%`).
+--
+
+```{r}
+select(random_points, 1:2) %>%
+  slice(1:2)
+```
+
+???
+```{r}
+m1 = attr(methods(class = "sf"), "info")$generic
+library(tidyverse)
+m2 = attr(methods(class = "sf"), "info")$generic
+noquote(setdiff(m2, m1))
+```
+
+
+# Spatial operations
+- Spatial subsetting
+- Topological or neighborhood operations
+- Spatial joins (spatial overlay)
 ---
 
 # Geometric operations
