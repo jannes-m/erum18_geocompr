@@ -1,6 +1,6 @@
 ---
 title: "Tutorial: Geocomputation with R"
-subtitle: "⚔<br>Geographic rater data in R"
+subtitle: "⚔<br>Geographic raster data in R"
 author: "Jannes Muenchow, Robin Lovelace"
 date: "ERUM Budapest, 2018-05-14"
 output:
@@ -22,22 +22,166 @@ background-size: cover
 ---
 # Raster data in R
 
-Remember: the geographic raster data model is used to represent continous surfaces.
-Rasters consist of a header and a matrix containing the actual values. 
-Let's create a raster from scratch
+Remember: the geographic raster data model is used to represent continuous surfaces.
+Rasters consist of a **header** and a **matrix** containing the actual values. 
+Let's create a raster from scratch.
+In R we use the **raster** package written by Robert J. Hijmans.
 --
 
-```{r}
+```{r, message=FALSE}
 library("raster")
 elev = raster(nrow = 6, ncol = 6, res = 0.5,
               xmn = -1.5, xmx = 1.5,
               ymn = -1.5, ymx = 1.5,
               vals = 1:36)
 ```
--- 
+
+---
+
+# Raster data in R
 
 ```{r}
 elev
 ```
 
 ---
+
+# Raster data in R
+
+.pull-left[
+```{r, eval=FALSE}
+plot(elev)
+```
+]
+
+--
+
+.pull-right[
+```{r, echo=FALSE}
+plot(elev)
+```
+]
+---
+
+# Raster subsetting
+Since a raster is a matrix, subsetting follows the usual `i,j` conventions. Let's select the first and the last value.
+--
+
+```{r}
+elev[1, 1]
+elev[6, 6]
+```
+???
+or using cell IDs:
+
+```{r, eval=FALSE}
+elev[1]
+elev[36]
+```
+---
+
+# Spatial subsetting
+
+using coordinates:
+```{r}
+extract(elev, data.frame(x = 0.75, y = 0.75))
+```
+--
+
+using a SpatialObject (`SpatialPointsDataFrame`):
+--
+
+```{r, message=FALSE}
+library("sf")
+library("dplyr")
+pt = st_point(c(0.75, 0.75)) %>%
+  st_sfc %>%
+  st_sf %>% 
+  as(., "Spatial")
+# use the SpatialObject for subsetting
+elev[pt]
+```
+---
+
+using another raster object:
+
+.pull-left[
+```{r}
+clip = 
+  raster(nrow = 3, ncol = 3, 
+         res = 0.3, xmn = 0.6, 
+         xmx = 1.5, ymn = -0.45, 
+         ymx = 0.45, 
+         vals = rep(1, 9))
+elev[clip]
+```
+]
+
+--
+.pull-right[
+```{r, echo=FALSE}
+plot(elev, legend = FALSE)
+plot(rasterToPolygons(clip), add = TRUE)
+```
+]
+
+???
+all raster values are returned when their midpoint is covered by the overlayed object
+---
+
+# Intersecting geometry
+If you want the intersecting geometry instead of the values, set the the `drop`-parameter to `FALSE`:
+--
+
+```{r}
+elev[clip, drop = FALSE]
+```
+
+---
+
+# Intersecting geometry
+which in fact is the same as using `intersect()`:
+
+```{r}
+raster::intersect(elev, clip)
+```
+---
+
+# Map algebra
+You may use with raster datasets:
+
+- algebraic operators such as `+`, `-`, `*`, `/`
+- logical operators such as `>`, `>=`, `<`, `==`, `!`
+- functions such as `abs`, `round`, `ceiling`, `floor`, `trunc`, `sqrt`, `log`, `log10`, `exp`, `cos`, `sin`, `max`,  `min`,  `range`,  `prod`,  `sum`,  `any`,  `all`.   
+
+```{r, eval=FALSE}
+elev + 1
+elev^2
+elev / 4
+```
+---
+
+# Map algebra
+local -> compute NDVI
+focal -> smoothing
+zonal -> compute the mean elevation for different land use classes
+global -> summary statistiscs
+
+---
+
+# Aggregation and disaggregation
+Change the resolution of a raster 
+```{r}
+elev_agg = aggregate(elev, fact = 2, fun = mean)
+par(mfrow = c(1, 2))
+plot(elev)
+plot(elev_agg)
+```
+---
+
+# Reprojecting a raster
+projectRaster
+
+---
+
+# Your turn
