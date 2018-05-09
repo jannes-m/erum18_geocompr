@@ -280,6 +280,9 @@ noquote(setdiff(m2, m1))
 ```
 ---
 
+# Vector attribute operations
+Further reading: [https://geocompr.robinlovelace.net/attr.html#vector-attribute-manipulation](https://geocompr.robinlovelace.net/attr.html#vector-attribute-manipulation)
+
 # Your turn
 - Select all observations of `random_points` (`data("random_points, package = "RQGIS")`) which have more than 10 species (column `spri`). Plot the geometry of all points and add your selection to the plot in another color.
 - Based on `spri` add a categorical column to `random_points`  with 0-5 corresponding to `low`, 5-10 to `medium` and >10 to `high`. 
@@ -409,7 +412,10 @@ join = st_join(nz_height, select(nz, Name))
 ```{r}
 slice(join, 1:2)
 ```
+---
 
+# Spatial operations on vector data
+Further reading: [https://geocompr.robinlovelace.net/spatial-operations.html#spatial-vec](https://geocompr.robinlovelace.net/spatial-operations.html#spatial-vec)
 
 ---
 
@@ -476,6 +482,25 @@ regions %>%
 ]
 
 ---
+
+# A brief word on CRS
+
+
+???
+If one wants to know which position of the Earth we refer to, coordinates of geospatial data require a reference system:
+
+    geodesic/geographic coordinates need an order (long/lat or lat/long?), a unit (rad, arc_degree?) and a datum (a reference ellipsoid: WGS84, ETRS89, NAD27?)
+    cartesian/projected coordinates (e.g. UTM, web Mercator) need also measurement units, and some way of encoding how they relate to geodesic coordinates, in which datum (the Proj.4 string)
+
+To handle coordinate reference systems, to convert coordinates (projections) and do datum transformations, Proj.4 is the code base most widely adopted, and actively maintained, by the open source geospatial community.
+
+Package sf has crs objects that register coordinate reference systems:
+
+
+---
+
+# Geometric operations on vector data
+Further reading: [https://geocompr.robinlovelace.net/transform.html#geo-vec](https://geocompr.robinlovelace.net/transform.html#geo-vec)
 
 # Your turn
 - Filter the Canterbury region from `nz`, and find all summits of `nz_height` that do not intersect with the Canterbury region (both datasets come with the `spData` package).
