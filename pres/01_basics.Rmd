@@ -68,16 +68,19 @@ dev.off()
 1. Basics
 --
 
-1. Spatial operations
+1. Spatial vector data
 --
 
-3. Visualization
+1. Spatial raster data
 --
 
-4. Bridges to GIS
+1. Mapping
 --
 
-5. Spatial statistical learning
+1. Bridges to GIS
+--
+
+1. (Spatial statistical learning)
 ---
 
 # Who we are
