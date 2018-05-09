@@ -83,6 +83,7 @@ set_bb = function(x) {
   x 
   }
 random_points = set_bb(random_points)
+par(mar = rep(0, 4))
 plot(random_points)
 ```
 ]
@@ -92,7 +93,7 @@ plot(random_points)
 .pull-left[
 ```{r, eval=FALSE}
 plot(
-*  st_geometry(random_points),
+* st_geometry(random_points),
   pch = 16, cex = 2,
   col = "black"
   bg = "lightblue"
@@ -104,6 +105,7 @@ plot(
 
 .pull-right[
 ```{r, echo=FALSE}
+par(mar = rep(0, 4))
 plot(st_geometry(random_points), pch = 21, cex = 2,
      col = "black", bg = "lightblue")
 ```
@@ -186,8 +188,6 @@ plot(l, cex = 2, col = "orange", lwd = 2, add = TRUE)
 ```
 ]
 
---
-
 ???
 Package sf puts features in sf tables deriving from data.frame or tbl_df, which have geometries in a list-column of class sfc, where each list element is a single feature’s geometry of class sfg. Feature geometries are represented in R by
 - a numeric vector for a single point (POINT)
@@ -214,10 +214,10 @@ pts = list(p, p_2) %>%
 # Putting it all together
 **sf** uses three classes to represent simple features in R:
 
-- `sf` is the `data.frame` with the attributes and the list-column
+- `sf` is the `data.frame` with the attributes and the geometry list-column
 --
 
-- The list column is of class `sfc`.
+- The geometry list column is of class `sfc`.
 
 ```{r} 
 lc = random_points %>%
@@ -278,20 +278,217 @@ library(tidyverse)
 m2 = attr(methods(class = "sf"), "info")$generic
 noquote(setdiff(m2, m1))
 ```
+---
 
+# Your turn
+- Select all observations of `random_points` (`data("random_points, package = "RQGIS")`) which have more than 10 species (column `spri`). Plot the geometry of all points and add your selection to the plot in another color.
+- Based on `spri` add a categorical column to `random_points`  with 0-5 corresponding to `low`, 5-10 to `medium` and >10 to `high`. 
+- Optional: create two points of class `sfg` and convert them into an object of class `sf` which has an `id` and a `geometry` column.
+---
 
-# Spatial operations
+# Spatial vector operations
+Spatial operations make use of spatial relationship between objects (features). In the following we will address:
+--
+
 - Spatial subsetting
+--
+
 - Topological or neighborhood operations
+--
+
 - Spatial joins (spatial overlay)
 ---
 
-# Geometric operations
+# Spatial subsetting
+.pull-left[
+```{r, eval=FALSE}
+# spData makes available
+# nz and nz_height
+library("spData")
+plot(st_geometry(nz))
+plot(st_geometry(nz_height),
+     pch = 16, col = "red2"
+     cex = 2, add = TRUE)
+
+```
+]
+
+--
+
+.pull-right[
+```{r, echo=FALSE}
+# spData makes available nz and nz_height
+library("spData")
+par(mar = rep(0, 4))
+plot(st_geometry(nz))
+plot(st_geometry(nz_height), pch = 16, 
+     col = "red", cex = 2, add = TRUE)
+
+```
+]
 
 ---
 
-# Little exercise
+# Spatial subsetting
+.pull-left[
+```{r, eval=FALSE}
+canterbury = nz %>%
+  filter(Name == "Canterbury")
+plot(st_geometry(canterbury))
+plot(st_geometry(nz_height), 
+     cex = 2, add = TRUE)
+# spatial subsetting
+sel = nz_height[canterbury, ]
+plot(st_geometry(sel), cex = 2, 
+     col = "red", pch = 16,
+     add = TRUE)
+````
+]
 
+--
+
+.pull-left[
+```{r, echo=FALSE}
+par(mar = rep(0, 4))
+canterbury = nz %>% filter(Name == "Canterbury")
+plot(st_geometry(canterbury))
+plot(st_geometry(nz_height), cex = 2, add = TRUE)
+# spatial subsetting
+sel = nz_height[canterbury, ]
+plot(st_geometry(sel), cex = 2, pch = 16, col = "red", add = TRUE)
+```
+]
+
+---
+
+# Topological relations
+Implicitly our subsetting used `st_intersects`, i.e. it returned all featured that touched or overlapped.
+
+```{r, eval=FALSE}
+nz_height[canterbury, op = st_intersects]
+# see also
+?st_sf
+```
+--
+
+We can use `st_intersects` individually. This returns a boolean vector if there is an intersection.
+--
+
+```{r}
+st_intersects(nz_height, canterbury, sparse = FALSE) %>% head
+```
+---
+
+aside from `st_intersects` there are further predicates:
+- `st_disjoint`: the opposite of `st_intersects`
+- `st_touches`: just touching
+- ... 
+- have a look at `?st_intersects` for a complete list and description
+???
+```{r}
+st_intersects(nz_height, nz)
+```
+This tells us that the first summit of nz_height has an intersection with polygon number 13 of nz.
+And the same in matrix notation
+```{r}
+st_intersects(nz_height, nz, sparse = FALSE)[1:2, ]
+```
+
+---
+
+# Spatial join
+Transfer the attribute of one spatial object to another spatial object based on intersecting geometries.
+For example, let us add the region name from `nz` to `nz_height` (so far consisting of columnes `t50_fid`, `elevation` and `geometry`).
+--
+
+```{r}
+join = st_join(nz_height, select(nz, Name))
+```
+--
+
+```{r}
+slice(join, 1:2)
+```
+
+
+---
+
+# Geometric operations
+What if we want the geometric intersection of two overlapping spatial objects instead of a boolean vector?
+--
+
+<center>
+<figure>
+<img src="img/venn-clip-1.png" width = "100%", height = "100%"/>
+</figure>
+---
+
+# Spatial aggregation (dissolving polygons)
+
+.pull-left[
+```{r, eval=FALSE}
+library("spData")
+us_states %>%
+  select(total_pop_15) %>%
+  plot
+```
+]
+
+--
+
+.pull-left[
+```{r, echo=FALSE}
+library("spData")
+plot(us_states[, "total_pop_15"])
+```
+]
+---
+
+# Spatial aggregation (dissolving polygons)
+
+.pull-left[
+.smaller-code-font75[
+```{r, eval=FALSE}
+regions = us_states %>% 
+  group_by(REGION) %>%
+  summarize(pop = sum(total_pop_15,
+                      na.rm = TRUE))
+regions %>%
+  select(pop) %>%
+  plot
+```
+]
+]
+
+--
+
+.pull-right[
+```{r, echo=FALSE}
+regions = us_states %>% 
+  group_by(REGION) %>%
+  summarize(pop = 
+              sum(total_pop_15,
+                  na.rm = TRUE))
+regions %>%
+  select(pop) %>%
+  plot
+```
+]
+
+---
+
+# Your turn
+- Filter the Canterbury region from `nz`, and find all summits of `nz_height` that do not intersect with the Canterbury region (both datasets come with the `spData` package).
+- What happens if we spatially join the elevation column of `nz_height` to `nz`?
+- Create two overlapping circles (see below) and compute and plot their geometric intersection. Secondly union the circles.
+```{r, eval=FALSE}
+pts = st_sfc(st_point(c(0, 1)), st_point(c(1, 1))) # create 2 points
+# use the buffer function to create circles from points
+circles = st_buffer(pts, dist = 1) 
+x = circles[1, ]
+y = circles[2, ]
+```
+- Compute the average population (`total_pop_15`) for each `REGION` of `us_states`. Plot your result.
 
 ---
 
