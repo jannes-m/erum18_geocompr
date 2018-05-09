@@ -505,8 +505,6 @@ Reproject with the help of `st_transform()`:
 st_transform(us_states, crs = 4326)
 ```
 
-Further reading: [https://geocompr.robinlovelace.net/transform.html#reproj-geo-data](https://geocompr.robinlovelace.net/transform.html#reproj-geo-data)
-
 ???
 If one wants to know which position of the Earth we refer to, coordinates of geospatial data require a reference system:
 
@@ -518,8 +516,10 @@ To handle coordinate reference systems, to convert coordinates (projections) and
 Package sf has crs objects that register coordinate reference systems:
 ---
 
-# Geometric operations on vector data
-Further reading: [https://geocompr.robinlovelace.net/transform.html#geo-vec](https://geocompr.robinlovelace.net/transform.html#geo-vec)
+# Further reading
+
+- [Projections](https://geocompr.robinlovelace.net/transform.html#reproj-geo-data)
+- [Geometric operations on vector data](https://geocompr.robinlovelace.net/transform.html#geo-vec)
 ---
 
 # Your turn
