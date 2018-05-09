@@ -63,7 +63,7 @@ plot(elev)
 ]
 ---
 
-# Raster subsetting
+# Raster attribute subsetting
 Since a raster is a matrix, subsetting follows the usual `i,j` conventions. Let's select the first and the last value.
 --
 
@@ -80,7 +80,7 @@ elev[36]
 ```
 ---
 
-# Spatial subsetting
+# Raster spatial operations - subsetting
 
 using coordinates:
 ```{r}
@@ -129,6 +129,61 @@ plot(rasterToPolygons(clip), add = TRUE)
 all raster values are returned when their midpoint is covered by the overlayed object
 ---
 
+# Map algebra - local operations
+You may use with raster datasets:
+
+- algebraic operators such as `+`, `-`, `*`, `/`
+- logical operators such as `>`, `>=`, `<`, `==`, `!`
+- functions such as `abs`, `round`, `ceiling`, `floor`, `trunc`, `sqrt`, `log`, `log10`, `exp`, `cos`, `sin`, `max`,  `min`,  `range`,  `prod`,  `sum`,  `any`,  `all`.   
+--
+
+```{r, eval=FALSE}
+elev + 1
+elev^2
+elev / 4
+```
+--
+
+Cell-by-cell operations are also called local operations.
+The calculation of the NDVI is one of the most popular examples.
+
+???
+The calculation of the normalized difference vegetation index (NDVI) is one of the most famous local, i.e. pixel-by-pixel, raster operations.
+It ranges between - 1 and 1 with positive values indicating the presence of living plants (mostly > 0.2).
+To calculate the NDVI, one uses the red and near-infrared bands of remotely sensed imagery (e.g. Landsat or Sentinel imagery) exploiting the fact that vegetation absorbs light heavily in the visible light spectrum, and especially in the red channel, while reflecting it in the near-infrared spectrum.
+---
+
+# Map algebra - focal operations
+While local functions operate on one cell, though possibly from multiple layers, **focal** operations take into account a central cell and its neighbors.
+The neighborhood (also named kernel, filter or moving window) under consideration is typically of size 3-by-3 cells (that is the central cell and its eight surrounding neighbors) but can take on any other (not necessarily rectangular) shape as defined by the user.
+???
+A focal operation applies an aggregation function to all cells within the specified neighborhood, uses the corresponding output as the new value for the the central cell, and moves on to the next central cell.
+Other names for this operation are spatial filtering and convolution.
+
+---
+
+# Map algebra - focal operations
+```{r, elev = FALSE}
+r_focal = focal(elev, w = matrix(1, nrow = 3, ncol = 3), fun = min)
+``` 
+
+<center>
+<figure>
+<img  src="img/04_focal_example.png" width = "100%", height = "100%"/>
+</figure>
+---
+
+# Map algebra - zonal operations
+zonal -> compute the mean elevation for different land use classes
+---
+
+# Map algebra - global operations
+global -> summary statistiscs
+
+---
+# Geometric operations on raster data
+---
+
 # Intersecting geometry
 If you want the intersecting geometry instead of the values, set the the `drop`-parameter to `FALSE`:
 --
@@ -146,37 +201,28 @@ which in fact is the same as using `intersect()`:
 raster::intersect(elev, clip)
 ```
 ---
-
-# Map algebra
-You may use with raster datasets:
-
-- algebraic operators such as `+`, `-`, `*`, `/`
-- logical operators such as `>`, `>=`, `<`, `==`, `!`
-- functions such as `abs`, `round`, `ceiling`, `floor`, `trunc`, `sqrt`, `log`, `log10`, `exp`, `cos`, `sin`, `max`,  `min`,  `range`,  `prod`,  `sum`,  `any`,  `all`.   
-
-```{r, eval=FALSE}
-elev + 1
-elev^2
-elev / 4
-```
----
-
-# Map algebra
-local -> compute NDVI
-focal -> smoothing
-zonal -> compute the mean elevation for different land use classes
-global -> summary statistiscs
-
----
-
 # Aggregation and disaggregation
-Change the resolution of a raster 
-```{r}
+Change the resolution of a raster:
+
+.pull-left[
+```{r, eval=FALSE}
+elev_agg = 
+  aggregate(elev, fact = 2,
+            fun = mean)
+```
+Use `dissaggregate()` for increasing the spatial resolution of a raster
+]
+
+--
+
+.pull-right[
+```{r, echo=FALSE}
 elev_agg = aggregate(elev, fact = 2, fun = mean)
 par(mfrow = c(1, 2))
 plot(elev)
 plot(elev_agg)
 ```
+]
 ---
 
 # Reprojecting a raster
