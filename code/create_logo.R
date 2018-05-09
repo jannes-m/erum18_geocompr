@@ -16,12 +16,12 @@
 #**********************************************************
 
 # attach packages
-library("sf")
-library("spData")
-library("raster")
-library("grid")
-library("gridBase")
-library("gridExtra")
+library(sf)
+library(spData)
+library(raster)
+library(grid)
+library(gridBase)
+library(gridExtra)
 # attach data
 rlogo = brick("pres/img/Rlogo.tif")
 
@@ -64,5 +64,5 @@ seekViewport("base")
 pushViewport(viewport(x = 0.48, y = 0, width = 0.5, height = 0.5, 
                       just = c(0, 0)))
 par(new = TRUE, fig = gridFIG())
-plotRGB(logo)
+plotRGB(rlogo)
 dev.off()
