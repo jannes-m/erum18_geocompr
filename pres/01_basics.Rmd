@@ -50,6 +50,12 @@ Please install following packages:
 install.packages(c("sf", "raster", "spData", "dplyr", "RQGIS"))
 ```
 
+Or from [docker](https://github.com/Robinlovelace/geocompr#running-the-book-in-docker):
+
+```
+docker run -d -p 8787:8787 -v ${pwd}:/data robinlovelace/geocompr
+```
+
 ---
 layout: false
 # Contents of the tutorial
