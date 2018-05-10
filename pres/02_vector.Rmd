@@ -5,7 +5,7 @@ author: "Jannes Muenchow, Robin Lovelace"
 date: "ERUM Budapest, 2018-05-14"
 output:
   xaringan::moon_reader:
-    css: "raw/xaringan/my-theme.css"
+    css: "my-theme.css"
     seal: true
     lib_dir: libs
     nature:
@@ -16,7 +16,7 @@ output:
 ---
 
 layout: true
-background-image: url(raw/xaringan/img/r_geocomp_background.png)
+background-image: url(img/r_geocomp_background.png)
 background-size: cover
 
 ---
@@ -481,8 +481,8 @@ regions %>%
 We display spatial data in 2D, i.e., we neglect the curvature of the Earth which leads to distortions.
 We distinguish between:
 
-- geographical Coordinate Reference Systems (CRS) use one specific ellipsoid (WGS84)
-- projected CRS (usually use a specific ellipsoid which is especially suitable for a certain part of the Earth)
+- geographical Coordinate Reference Systems (CRS) use one specific ellipsoid (WGS84) and span the entire world
+- projected CRS are localized to minimize visual distortion in a particular region (usually use a specific ellipsoid which is especially suitable for a this particular part of the Earth)
 
 **sf** lets you use CRS and change CRS (reproject) through [Proj.4]((https://proj4.org/)).
 --
