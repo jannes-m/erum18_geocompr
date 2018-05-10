@@ -533,8 +533,7 @@ Package sf has crs objects that register coordinate reference systems:
 
 # Further reading
 
-- 
-- [Geometric operations on vector data](https://geocompr.robinlovelace.net/transform.html#geo-vec)
+[Geometric operations on vector data](https://geocompr.robinlovelace.net/transform.html#geo-vec)
 ---
 
 # Your turn
