@@ -526,3 +526,10 @@ y = circles[2, ]
 ```
 - Compute the average population (`total_pop_15`) for each `REGION` of `us_states`. Plot your result.
 - Find out about the CRS of `nz`, reproject it into a geographic CRS (EPSG: 4326) and plot the original and unproject `nz` object next to each other.
+
+# Recap
+We have learned how to perform with `sf`-objects:
+
+- Attribute operations
+- Spatial attribute operations
+- Geometric operations
