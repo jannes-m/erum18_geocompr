@@ -58,6 +58,7 @@ docker run -d -p 8787:8787 -v ${pwd}:/data robinlovelace/geocompr
 
 ---
 layout: false
+
 # Contents of the tutorial
 
 ```{r, eval=FALSE, echo=FALSE}
@@ -105,7 +106,7 @@ dev.off()
 - [Jannes Muenchow](http://www.geographie.uni-jena.de/en/Muenchow.html) - GIScientist from Jena with a special focus on ecology and landsliding; creator of the **RQGIS** package
 --
 
-- [Robin Lovelace](https://www.robinlovelace.net/) - geographer with a special focus on sustainable transport planning; creator of the **stplanr** package
+- [Robin Lovelace](https://www.robinlovelace.net/) - Geographer and Environmental Scientist focussing on sustainable transport planning; creator of **stplanr**
 --
 
 - together with [Jakub Nowosad](https://nowosad.github.io/) we are writing:
@@ -165,16 +166,22 @@ Remember R has never been intended to be a GIS though it is great that we can us
 - Geographic data science
 
 <br>
+--
+
+### Graphical User Interface (GUI) GIS vs Geocomputation with R
+
+```{r gdsl, echo=FALSE, message=FALSE}
+d = readr::read_csv("https://github.com/Robinlovelace/geocompr/raw/master/extdata/gis-vs-gds-table.csv")
+knitr::kable(x = d, format = "html")
+```
+
 <br>
 <br>
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
+--
 Further reading:
 [https://geocompr.robinlovelace.net/intro.html#what-is-geocomputation](https://geocompr.robinlovelace.net/intro.html#what-is-geocomputation)
 
