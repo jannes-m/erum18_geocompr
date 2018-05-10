@@ -16,7 +16,7 @@ output:
 ---
 
 layout: true
-background-image: url(raw/xaringan/img/r_geocomp_background.png)
+background-image: url(img/r_geocomp_background.png)
 background-size: cover
 
 ---
@@ -25,7 +25,7 @@ background-size: cover
 Remember: the geographic raster data model is used to represent continuous surfaces.
 Rasters consist of a **header** and a **matrix** containing the actual values. 
 Let's create a raster from scratch.
-In R we use the **raster** package written by Robert J. Hijmans.
+In R we use the popular **raster** package written by Robert J. Hijmans.
 --
 
 ```{r, message=FALSE}
@@ -62,6 +62,10 @@ plot(elev)
 ```
 ]
 ---
+class: inverse, center, middle
+
+# Raster attribute subsetting
+---
 
 # Raster attribute subsetting
 Since a raster is a matrix, subsetting follows the usual `i,j` conventions. Let's select the first and the last value.
@@ -78,6 +82,12 @@ or using cell IDs:
 elev[1]
 elev[36]
 ```
+
+---
+class: inverse, center, middle
+
+# Spatial raster operations
+
 ---
 
 # Raster spatial operations - subsetting
@@ -181,8 +191,11 @@ zonal -> compute the mean elevation for different land use classes
 global -> summary statistiscs
 
 ---
+class: inverse, center, middle
+
 # Geometric operations on raster data
 ---
+
 
 # Intersecting geometry
 If you want the intersecting geometry instead of the values, set the the `drop`-parameter to `FALSE`:

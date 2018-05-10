@@ -52,7 +52,7 @@ install.packages(c("sf", "raster", "spData", "dplyr", "RQGIS"))
 
 ---
 layout: false
-# Contents
+# Contents of the tutorial
 
 ```{r, eval=FALSE, echo=FALSE}
 library(sf)
@@ -129,6 +129,10 @@ leaflet() %>%
              popup = popup)
 ```
 ---
+class: inverse, center, middle
+
+# Some definitions
+---
 
 # What is a GIS?
 
@@ -175,7 +179,11 @@ emphasizing engineering or science, etc.) (Longley et al., 2005)."
 
 "There are many close synonyms for geographic information science (GIScience), one of which is geocomputation - a term first coined by the geographer Stan Openshaw to describe the scientific application of computationally-intensive techniques to problems with a spatial dimension" (Longley et al., 2005).
 ---
+class: inverse, center, middle
 
+# Geographic data models
+
+---
 # Geographic data
 
 - Geographic data consists of xy-coordinates and corresponding attributes (this might include a time stamp, otherwise the data is static).
@@ -316,7 +324,11 @@ further reading: [https://geocompr.robinlovelace.net/spatial-class.html#raster-d
 <img src="img/raster_header.png" width = "100%", height = "100%"/>
 </figure>
 ---
+class: inverse, center, middle
 
+# A brief word on CRS
+
+---
 # A brief word on CRS
 
 We use Coordinate Reference Systems (CRS) to locate our geographic data on Earth.
@@ -371,6 +383,10 @@ Further reading:
 - [Gecomputation with R - Projections](https://geocompr.robinlovelace.net/transform.html#reproj-geo-data)
 - [QGIS CRS documentation](https://docs.qgis.org/2.14/en/docs/gentle_gis_introduction/coordinate_reference_systems.html)
 - [Earth Data Science CRS](https://earthdatascience.org/courses/earth-analytics/spatial-data-r/intro-to-coordinate-reference-systems/)
+---
+class: inverse, center, middle
+
+# Brief history of R-spatial
 ---
 
 # Brief history of R-spatial
