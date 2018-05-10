@@ -43,6 +43,13 @@ background-size: cover
 <br>
 https://github.com/jannes-m/erum18_geocompr
 
+<br>
+<br>
+Please install following packages:
+```{r, eval=FALSE}
+install.packages(c("sf", "raster", "spData", "dplyr", "RQGIS"))
+```
+
 ---
 layout: false
 # Contents
@@ -308,6 +315,62 @@ further reading: [https://geocompr.robinlovelace.net/spatial-class.html#raster-d
 <figure>
 <img src="img/raster_header.png" width = "100%", height = "100%"/>
 </figure>
+---
+
+# A brief word on CRS
+
+We use Coordinate Reference Systems (CRS) to locate our geographic data on Earth.
+
+We distinguish between:
+
+- geographical CRS span the entire world
+- projected CRS are (usually) localized to minimize visual distortion in a particular region ( use a specific ellipsoid which is especially suitable for a this particular part of the Earth)
+
+???
+CRS consists of a reference ellipsoid, a datum (defines the origin. I think of this as the base information needed to “draw” the imaginary coordinate lines on a globe or map. A datum is chosen to give the best possible fit to the true shape of the Earth. )
+A geographic CRS uses a grid that wraps around the entire globe. This means that each point on the globe is defined using the SAME coordinate system and the same units as defined within that particular geographic CRS.
+---
+
+# Geographic CRS
+
+.pull-left[
+- usually in decimal degrees
+- used by many people/institutions (GPS)
+- great for locating a place on Earth
+- best for global analysis
+- less suitable if you want to measure distance
+- heavily distorted towards the poles
+
+]
+
+.pull-right[
+<figure>
+<img  src="img/latitude-longitude-globe-ESRI.gif" width = "90%", height = "90%"/>
+<figcaption >Source: ESRI.</figcaption>
+</figure>
+]
+
+
+???
+difference 1 decimal degree at the equator and at the poles
+---
+
+# Projected CRS
+- spatial projections flatten the 3D shape of the Earth onto a 2D plane
+- especially suitable for "local" analysis
+
+.pull-right[
+<figure>
+<img  src="img/spatial-projection-transformations-crs.png" width = "90%", height = "90%"/>
+<figcaption>Source: <a href="http://progonos.com/furuti/">progonos.com/furuti/</a> </figcaption>
+</figure>
+]
+--
+<br> 
+Further reading:
+- [Gecomputation with R - Projections](https://geocompr.robinlovelace.net/transform.html#reproj-geo-data)
+- [QGIS CRS documentation](https://docs.qgis.org/2.14/en/docs/gentle_gis_introduction/coordinate_reference_systems.html)
+- [Earth Data Science CRS](https://earthdatascience.org/courses/earth-analytics/spatial-data-r/intro-to-coordinate-reference-systems/)
 ---
 
 # Brief history of R-spatial
