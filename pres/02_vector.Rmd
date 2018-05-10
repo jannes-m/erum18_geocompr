@@ -29,6 +29,13 @@ background-size: cover
 https://github.com/jannes-m/erum18_geocompr
 
 ---
+class: inverse, center, middle
+
+# Simple features in R
+
+---
+
+---
 # Simple features in R
 Simple feature access is a widely used [ISO standard](http://www.opengeospatial.org/standards/sfa).
 --
@@ -222,7 +229,11 @@ class(lc[[1]])
 
 For more information, refer to `vignette("sf1", package = "sf")` and [https://geocompr.robinlovelace.net/spatial-class.html#vector-data](https://geocompr.robinlovelace.net/spatial-class.html#vector-data)
 ---
+class: inverse, center, middle
 
+# Attribute operations
+
+---
 # Attribute operations
 - `sf` objects are basically dataframes and thus can be handled like any other R object.
 
@@ -269,14 +280,20 @@ noquote(setdiff(m2, m1))
 
 # Vector attribute operations
 Further reading: [https://geocompr.robinlovelace.net/attr.html#vector-attribute-manipulation](https://geocompr.robinlovelace.net/attr.html#vector-attribute-manipulation)
+---
 
 # Your turn
 - Select all observations of `random_points` (`data("random_points, package = "RQGIS")`) which have more than 10 species (column `spri`). Plot the geometry of all points and add your selection to the plot in another color.
 - Based on `spri` add a categorical column to `random_points`  with 0-5 corresponding to `low`, 5-10 to `medium` and >10 to `high`. 
 - Optional: create two points of class `sfg` and convert them into an object of class `sf` which has an `id` and a `geometry` column.
 ---
+class: inverse, center, middle
 
-# Spatial vector operations
+# Spatial attribute operations
+
+---
+
+# Spatial attribute operations
 Spatial operations make use of spatial relationship between objects (features). In the following we will address:
 --
 
@@ -401,7 +418,7 @@ slice(join, 1:2)
 ```
 ---
 
-# Spatial operations on vector data
+# Spatial attribute operations on vector data
 Further reading: [https://geocompr.robinlovelace.net/spatial-operations.html#spatial-vec](https://geocompr.robinlovelace.net/spatial-operations.html#spatial-vec)
 
 ---
@@ -409,6 +426,11 @@ Further reading: [https://geocompr.robinlovelace.net/spatial-operations.html#spa
 # Your turn
 - Filter the Canterbury region from `nz`, and find all summits of `nz_height` that do not intersect with the Canterbury region (both datasets come with the `spData` package).
 - What happens if we spatially join the elevation column of `nz_height` to `nz`?
+
+---
+class: inverse, center, middle
+
+# Geometric operations
 
 ---
 
@@ -526,6 +548,7 @@ y = circles[2, ]
 ```
 - Compute the average population (`total_pop_15`) for each `REGION` of `us_states`. Plot your result.
 - Find out about the CRS of `nz`, reproject it into a geographic CRS (EPSG: 4326) and plot the original and unproject `nz` object next to each other.
+---
 
 # Recap
 We have learned how to perform with `sf`-objects:
