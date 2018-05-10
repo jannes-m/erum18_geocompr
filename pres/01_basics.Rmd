@@ -426,6 +426,9 @@ layout: false
 - Difference between the spatial vector and raster data model
 --
 
+- CRS
+--
+
 - Brief history of R-spatial
 
 
