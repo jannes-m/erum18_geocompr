@@ -36,7 +36,7 @@ background-size: cover
 
 ---
 
-# Find the slides and the code
+# Find the slides and code
 <br>
 <br>
 <br>
@@ -97,7 +97,7 @@ dev.off()
 1. (Spatial statistical learning)
 ---
 
-# Who we are
+# Who are we
 
 <figure>
 <img align="right" src="img/globe.png" width = "60%", height = "60%"/>
@@ -123,7 +123,7 @@ background-image: url(img/r_geocomp_background.png)
 background-size: cover
 ---
 
-# Where we are from
+# Where are we from
 
 <center>
 ```{r, echo = FALSE}
@@ -193,7 +193,7 @@ class: inverse, center, middle
 ---
 # Geographic data
 
-- Geographic data consists of xy-coordinates and corresponding attributes (this might include a time stamp, otherwise the data is static).
+- Geographic data consists of **xy-coordinates** and corresponding **attributes** (this might include a time stamp, otherwise the data is static).
 --
 
 - Usually we neglect the curvature of the Earth when visualizing geographic data.
@@ -202,10 +202,10 @@ class: inverse, center, middle
 - Geographic data only represents a simplified representation of the world. So we decide what we display for which purpose.
 --
 
-- Geographic data can become quickly big.
+- Geographic data can quickly become big.
 --
 
-- Two data models for representing digitally geographic data: the vector and the raster data model
+- Two data models for representing digitally geographic data: **the vector** and **the raster** data model
 
 ???
 Do not confuse the spatial vector data model with the vectors in R. The two are completely different things and in fact unrelated. Though we will see that we use vectors in R to represent the spatial vector data model.
@@ -231,16 +231,16 @@ dev.off()
 <img align="right" src="img/vector.png" width = "60%", height = "60%"/>
 </figure>
 
-- discrete objects represented by points
+- Discrete objects represented by points
 --
 
-- three subtypes: points, lines and polygons
+- Three main subtypes: points, lines and polygons
 --
 
-- especially suitable for objects with well-defined borders (lakes, houses, streets, etc.)
+- Especially suitable for objects with well-defined borders (lakes, houses, streets, etc.)
 --
 
-- attribute table
+- Attribute table
 
 <br>
 <br>
@@ -299,19 +299,19 @@ dev.off()
 <img align="right" src="img/raster.png" width = "50%", height = "50%"/>
 </figure>
 
-- continous fields represented by pixels (cells)
+- Continous fields represented by pixels (cells)
 --
 
-- one attribute value for one cell
+- One attribute value for one cell
 --
 
-- especially suitable for continous data without sharp borders (elevation, precipitation)
+- Especially suitable for continous data without sharp borders (elevation, precipitation)
 --
 
-- structure: raster header (origin, resolution, ncol, nrow, crs, NAvalue) and matrix containing the data
+- Structure: raster header (origin, resolution, ncol, nrow, crs, NAvalue) and matrix containing the data
 --
 
-- map algebra
+- Map algebra
 --
 
 <br>
@@ -321,7 +321,7 @@ dev.off()
 <br>
 <br>
 <br>
-further reading: [https://geocompr.robinlovelace.net/spatial-class.html#raster-data](https://geocompr.robinlovelace.net/spatial-class.html#raster-data)
+Further reading: [https://geocompr.robinlovelace.net/spatial-class.html#raster-data](https://geocompr.robinlovelace.net/spatial-class.html#raster-data)
 
 ---
 
@@ -342,8 +342,8 @@ We use Coordinate Reference Systems (CRS) to locate our geographic data on Earth
 
 We distinguish between:
 
-- geographical CRS span the entire world
-- projected CRS are (usually) localized to minimize visual distortion in a particular region ( use a specific ellipsoid which is especially suitable for a this particular part of the Earth)
+- Geographical CRS span the entire world
+- Projected CRS are (usually) localized to minimize visual distortion in a particular region (use a specific ellipsoid which is especially suitable for a this particular part of the Earth)
 
 ???
 CRS consists of a reference ellipsoid, a datum (defines the origin. I think of this as the base information needed to “draw” the imaginary coordinate lines on a globe or map. A datum is chosen to give the best possible fit to the true shape of the Earth. )
@@ -353,12 +353,12 @@ A geographic CRS uses a grid that wraps around the entire globe. This means that
 # Geographic CRS
 
 .pull-left[
-- usually in decimal degrees
-- used by many people/institutions (GPS)
-- great for locating a place on Earth
-- best for global analysis
-- less suitable if you want to measure distance
-- heavily distorted towards the poles
+- Usually in decimal degrees
+- Used by many people/institutions (GPS)
+- Great for locating a place on Earth
+- Best for global analysis
+- Less suitable if you want to measure distance
+- Heavily distorted towards the poles
 
 ]
 
@@ -378,8 +378,8 @@ difference 1 decimal degree at the equator and at the poles
 ---
 
 # Projected CRS
-- spatial projections flatten the 3D shape of the Earth onto a 2D plane
-- especially suitable for "local" analysis
+- Spatial projections flatten the 3D shape of the Earth onto a 2D plane
+- Especially suitable for "local" analysis
 
 ```{r vectorplots, eval = FALSE, fig.cap="Projected CRSs (source: Geocomputation with R and [progonos.com/furuti](http://progonos.com/furuti/))", out.width="40%", fig.show='hold', echo=FALSE}
 knitr::include_graphics(c("https://geocompr.robinlovelace.net/figures/vector_projected.png", "img/spatial-projection-transformations-crs.png"))
@@ -406,19 +406,19 @@ class: inverse, center, middle
 
 # Brief history of R-spatial
 
-- spatial packages already available in the S language since the 1990s `r Citep(my_bib, "bivand_implementing_2000", .opts = list(cite.style = "authoryear"))`
+- Spatial packages already available in the S language since the 1990s `r Citep(my_bib, "bivand_implementing_2000", .opts = list(cite.style = "authoryear"))`
 --
 
-- By 2000, modifications of these became R packages for point pattern analysis, geostatistics, exploratory spatial data analysis and spatial econometrics.
+- By 2000, modifications of these became R packages for point pattern analysis, geostatistics, exploratory spatial data analysis and spatial econometrics
 --
 
 - R-GIS bridges `r Citep(my_bib, "bivand_using_2000", .opts = list(cite.style = "authoryear"))`
 --
 
-- `r Citet(my_bib, "hornik_approaches_2003", .opts = list(cite.style = "authoryear"))` proposed a spatial data class system for R which eventually led to the packages **rgdal** `r Citep(my_bib, "bivand_rgdal_2018", .opts = list(cite.style = "authoryear"), before = "first released in 2003; ")` and **sp** `r Citep(my_bib, "bivand_applied_2013", .opts = list(cite.style = "authoryear"), before = "first released in 2005; ")`.
+- `r Citet(my_bib, "hornik_approaches_2003", .opts = list(cite.style = "authoryear"))` proposed a spatial data class system for R which eventually led to the packages **rgdal** `r Citep(my_bib, "bivand_rgdal_2018", .opts = list(cite.style = "authoryear"), before = "first released in 2003; ")` and **sp** `r Citep(my_bib, "bivand_applied_2013", .opts = list(cite.style = "authoryear"), before = "first released in 2005; ")`
 --
 
-- 2008: Applied Spatial Data Analysis with R `r Citep(my_bib, "bivand_applied_2013", .opts = list(cite.style = "authoryear"))`.
+- 2008: Applied Spatial Data Analysis with R `r Citep(my_bib, "bivand_applied_2013", .opts = list(cite.style = "authoryear"))`
 --
 
 - 2010: **raster** package `r Citep(my_bib, "hijmans_raster_2017", .opts = list(cite.style = "authoryear"))`
