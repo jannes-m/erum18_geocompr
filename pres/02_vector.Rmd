@@ -40,7 +40,7 @@ Simple feature access is a widely used [ISO standard](http://www.opengeospatial.
 --
 
 ```{r}
-library("sf")
+library(sf)
 ```
 
 **sf** automatically links to [GEOS](https://trac.osgeo.org/geos/), [GDAL](http://www.gdal.org/) and [Proj.4](https://proj4.org/).
@@ -107,7 +107,7 @@ plot(st_geometry(random_points), pch = 21, cex = 2,
 # Simple features in R
 
 ```{r, message=FALSE}
-library("dplyr")
+library(dplyr)
 select(random_points, 1:2) %>%
   head(2)
 ```
@@ -123,7 +123,7 @@ A few things to note:
 
 ---
 Things to note continued:
-- Each observation (row) has a geometry (which can consist of multiple features, think of polygons with holes or multi-part polygons)
+- Each observation (row) has a geometry (which can consist of multiple features, think of polygons with holes or multi-part polygons).
 --
 
 - The geometry column is a so-called **list-column**.
@@ -310,7 +310,7 @@ Spatial operations make use of spatial relationship between objects (features). 
 ```{r, eval=FALSE}
 # spData makes available
 # nz and nz_height
-library("spData")
+library(spData)
 plot(st_geometry(nz))
 plot(st_geometry(nz_height),
      pch = 16, col = "red2"
@@ -324,7 +324,7 @@ plot(st_geometry(nz_height),
 .pull-right[
 ```{r, echo=FALSE}
 # spData makes available nz and nz_height
-library("spData")
+library(spData)
 par(mar = rep(0, 4))
 plot(st_geometry(nz))
 plot(st_geometry(nz_height), pch = 16, 
@@ -447,7 +447,7 @@ What if we want the geometric intersection of two overlapping spatial objects in
 
 .pull-left[
 ```{r, eval=FALSE}
-library("spData")
+library(spData)
 us_states %>%
   select(total_pop_15) %>%
   plot
@@ -458,7 +458,7 @@ us_states %>%
 
 .pull-left[
 ```{r, echo=FALSE}
-library("spData")
+library(spData)
 plot(us_states[, "total_pop_15"])
 ```
 ]
@@ -498,7 +498,7 @@ regions %>%
 ---
 
 # CRS in sf
-**sf** lets you use CRS and change CRS (reproject) through [Proj.4]((https://proj4.org/)).
+**sf** lets you use CRS and change CRS (reproject) through [Proj.4]((https://proj4.org/).
 --
 
 ```{r}
