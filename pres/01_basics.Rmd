@@ -164,8 +164,6 @@ Remember R has never been intended to be a GIS though it is great that we can us
 - Geocomputation
 - GIScience
 - Geographic data science
-
-<br>
 --
 
 ### Graphical User Interface (GUI) GIS vs Geocomputation with R
@@ -177,10 +175,6 @@ knitr::kable(x = d, format = "html")
 
 <br>
 <br>
-<br>
-<br>
-<br>
-
 --
 Further reading:
 [https://geocompr.robinlovelace.net/intro.html#what-is-geocomputation](https://geocompr.robinlovelace.net/intro.html#what-is-geocomputation)
@@ -368,14 +362,17 @@ A geographic CRS uses a grid that wraps around the entire globe. This means that
 
 ]
 
+
+
 .pull-right[
-<figure>
-<img  src="https://geocompr.robinlovelace.net/figures/vector_lonlat.png" width = "90%", height = "90%"/>
-<figcaption >Source: <a href="https://geocompr.robinlovelace.net/spatial-class.html">Geocomputation with R</a>.</figcaption>
-</figure>
+```{r, echo=FALSE, message=FALSE}
+library("spData")
+library("sf")
+par(mar = rep(0, 4))
+plot(st_geometry(world))
+plot(st_geometry(st_graticule(world)), add = TRUE)
+```
 ]
-
-
 ???
 difference 1 decimal degree at the equator and at the poles
 ---
@@ -384,9 +381,16 @@ difference 1 decimal degree at the equator and at the poles
 - spatial projections flatten the 3D shape of the Earth onto a 2D plane
 - especially suitable for "local" analysis
 
-```{r vectorplots, fig.cap="Projected CRSs (source: Geocomputation with R and [progonos.com/furuti](http://progonos.com/furuti/))", out.width="40%", fig.show='hold', echo=FALSE}
+```{r vectorplots, eval = FALSE, fig.cap="Projected CRSs (source: Geocomputation with R and [progonos.com/furuti](http://progonos.com/furuti/))", out.width="40%", fig.show='hold', echo=FALSE}
 knitr::include_graphics(c("https://geocompr.robinlovelace.net/figures/vector_projected.png", "img/spatial-projection-transformations-crs.png"))
 ```
+
+.pull-right[
+<figure>
+<img  src="img/spatial-projection-transformations-crs.png" width = "90%", height = "90%"/>
+<figcaption>Source: <a href="http://progonos.com/furuti/">progonos.com/furuti/</a> </figcaption>
+</figure>
+]
 
 --
 <br> 
@@ -426,7 +430,7 @@ class: inverse, center, middle
 - 2016-17: **sf** - simple features for R `r Citep(my_bib, "pebesma_sf_2018", .opts = list(cite.style = "authoryear"))`
 --
 
-- 2017-18 **stars** - spatiotemporal tidy arrays for R `r Citep(my_bib, "pebesma_stars_2018", .opts = list(cite.style = "authoryear"))`
+- 2017-18: **stars** - spatiotemporal tidy arrays for R `r Citep(my_bib, "pebesma_stars_2018", .opts = list(cite.style = "authoryear"))`
 
 --
 <br>
