@@ -5,7 +5,7 @@ author: "Jannes Muenchow, Robin Lovelace"
 date: "ERUM Budapest, 2018-05-14"
 output:
   xaringan::moon_reader:
-    css: "raw/xaringan/my-theme.css"
+    css: "my-theme.css"
     seal: true
     lib_dir: libs
     nature:
