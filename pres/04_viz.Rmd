@@ -13,7 +13,6 @@ output:
       highlightLines: true
       ratio: '4:3'
       countIncrementalSlides: false
-bibliography: ../references.bib
 ---
 
 
