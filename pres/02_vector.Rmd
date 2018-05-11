@@ -35,7 +35,6 @@ class: inverse, center, middle
 
 ---
 
----
 # Simple features in R
 Simple feature access is a widely used [ISO standard](http://www.opengeospatial.org/standards/sfa).
 --
@@ -405,7 +404,7 @@ st_intersects(nz_height, nz, sparse = FALSE)[1:2, ]
 
 # Spatial join
 Transfer the attribute of one spatial object to another spatial object based on intersecting geometries.
-For example, let us add the region name from `nz` to `nz_height` (so far consisting of columnes `t50_fid`, `elevation` and `geometry`).
+For example, let us add the region name from `nz` to `nz_height` (so far consisting of columns `t50_fid`, `elevation` and `geometry`).
 --
 
 ```{r}
@@ -546,7 +545,7 @@ x = circles[1, ]
 y = circles[2, ]
 ```
 - Compute the average population (`total_pop_15`) for each `REGION` of `us_states`. Plot your result.
-- Find out about the CRS of `nz`, reproject it into a geographic CRS (EPSG: 4326) and plot the original and unproject `nz` object next to each other.
+- Find out about the CRS of `nz`, reproject it into a geographic CRS (EPSG: 4326) and plot the original `nz` object next to your transformed `nz` object.
 ---
 
 # Recap
