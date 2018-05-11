@@ -133,26 +133,6 @@ create a geometry set with two features
 st_sf(geometry = st_sfc(st_polygon(list(coords_1)), st_polygon(list(coords_2))))
 
 ---
-
-# Want to learn more about .small[`sf`] and geocomputation with R
-
-```{r, eval = FALSE}
-vignette(package = "sf")
-```
-
---
-<br>
-<br>
-
-And there's a new book to appear but you can already read it online:
-<br>
-<br>
-.center[http://robinlovelace.net/geocompr/]
-
-???
-Since the book is work in progress, you can contribute. So what would you like to learn? Are there topics you think are missing from another spatial book? Or you can even help writing the book!
-
----
 # Find a QGIS algorithm
 Now we would like to know which QGIS geoalgorithm we can use for this task. We assume that the word `intersec` will be part of the short description of the searched geoalgorithm
 ```{r, message = FALSE}
