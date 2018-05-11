@@ -191,7 +191,7 @@ Package sf puts features in sf tables deriving from data.frame or tbl_df, which 
 from: https://edzer.github.io/UseR2017/#a-short-history-of-handling-spatial-data-in-r
 ```{r, eval=FALSE}
 # creating an sf-object manually
-library("sf")
+library(sf)
 p = st_point(c(1, 1))
 p_2 = st_point(c(1, 2))
 pts = list(p, p_2)

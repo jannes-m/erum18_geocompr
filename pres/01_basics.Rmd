@@ -213,7 +213,7 @@ Do not confuse the spatial vector data model with the vectors in R. The two are 
 
 # Vector data model
 ```{r, echo=FALSE, eval=FALSE}
-library("sf")
+library(sf)
 p = st_point(c(1.5, 4.5))
 pts = matrix(data = c(1.4, 4.4, 1.5, 4.6, 1.6, 4.4), ncol = 2, byrow = TRUE)
 l = st_linestring(pts)
@@ -253,11 +253,11 @@ Further reading: [https://geocompr.robinlovelace.net/spatial-class.html#vector-d
 
 # Raster data model
 ```{r, echo=FALSE, message=FALSE, eval=FALSE}
-library("raster")
-library("grid")
-library("gridExtra")
-library("lattice")
-library("latticeExtra")
+library(raster)
+library(grid)
+library(gridExtra)
+library(lattice)
+library(latticeExtra)
 
 
 small_ras = raster(matrix(1:16, 4, 4, byrow = TRUE))
@@ -366,8 +366,8 @@ A geographic CRS uses a grid that wraps around the entire globe. This means that
 
 .pull-right[
 ```{r, echo=FALSE, message=FALSE}
-library("spData")
-library("sf")
+library(spData)
+library(sf)
 par(mar = rep(0, 4))
 plot(st_geometry(world))
 plot(st_geometry(st_graticule(world)), add = TRUE)

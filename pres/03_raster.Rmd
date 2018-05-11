@@ -29,7 +29,7 @@ In R we use the popular **raster** package written by Robert J. Hijmans.
 --
 
 ```{r, message=FALSE}
-library("raster")
+library(raster)
 elev = raster(nrow = 6, ncol = 6, res = 0.5,
               xmn = -1.5, xmx = 1.5,
               ymn = -1.5, ymx = 1.5,
@@ -106,8 +106,8 @@ using a SpatialObject (`SpatialPointsDataFrame`):
 --
 
 ```{r, message=FALSE}
-library("sf")
-library("dplyr")
+library(sf)
+library(dplyr)
 pt = st_point(c(0.75, 0.75)) %>%
   st_sfc %>%
   st_sf %>% 
@@ -195,9 +195,9 @@ Let's compute the mean elevation for different soil grain size classes.
 
 .pull-left[
 ```{r, echo=FALSE, message=FALSE}
-library("spData")
-library("grid")
-library("gridExtra")
+library(spData)
+library(grid)
+library(gridExtra)
 colfunc = colorRampPalette(c("lightyellow", "rosybrown"))
 colfunc2 = c("clay" = "brown", "silt" = "sandybrown", "sand" = "rosybrown")
 p_1 = spplot(grain, col.regions = colfunc2)
@@ -212,7 +212,7 @@ grid.draw(arrangeGrob(p_1, p_2, ncol = 1, clip = TRUE))
 
 .pull-right[
 ```{r}
-library("spData")
+library(spData)
 zonal(elev, grain, fun = "mean") 
 ```
 ]
@@ -304,7 +304,7 @@ plot(elev_agg)
 --
 
 ```{r, eval=FALSE}
-library("spDataLarge")
+library(spDataLarge)
 proj4string(nz_elev)
 projectRaster(nz_elev, crs = st_crs(4326)$proj4string)
 ```
