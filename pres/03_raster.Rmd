@@ -75,6 +75,10 @@ Since a raster is a matrix, subsetting follows the usual `i,j` conventions. Let'
 elev[1, 1]
 elev[6, 6]
 ```
+--
+
+Further reading: [https://geocompr.robinlovelace.net/attr.html#raster-subsetting](https://geocompr.robinlovelace.net/attr.html#raster-subsetting)
+
 ???
 or using cell IDs:
 
@@ -130,7 +134,7 @@ elev[clip]
 --
 .pull-right[
 ```{r, echo=FALSE}
-plot(elev, legend = FALSE)
+plot(elev[clip, drop = FALSE], legend = FALSE)
 plot(rasterToPolygons(clip), add = TRUE)
 ```
 ]
@@ -184,26 +188,82 @@ r_focal = focal(elev, w = matrix(1, nrow = 3, ncol = 3), fun = min)
 ---
 
 # Map algebra - zonal operations
-zonal -> compute the mean elevation for different land use classes
+Zonal operations are similar to focal operations.
+The difference is that zonal filters can take on any shape instead of just a predefined window.
+Let's compute the mean elevation for different soil grain size classes.
+--
+
+.pull-left[
+```{r, echo=FALSE, message=FALSE}
+library("spData")
+library("grid")
+library("gridExtra")
+colfunc = colorRampPalette(c("lightyellow", "rosybrown"))
+colfunc2 = c("clay" = "brown", "silt" = "sandybrown", "sand" = "rosybrown")
+p_1 = spplot(grain, col.regions = colfunc2)
+p_2 = spplot(elev, col.regions = colfunc(16))
+grid.draw(grobTree(rectGrob(gp = gpar(lwd = 0))))
+grid.draw(arrangeGrob(p_1, p_2, ncol = 1, clip = TRUE))
+
+```
+]
+
+--
+
+.pull-right[
+```{r}
+library("spData")
+zonal(elev, grain, fun = "mean") 
+```
+]
+
+
+
 ---
 
 # Map algebra - global operations
-global -> summary statistiscs
+Global operations are a special case of zonal operations with the entire raster dataset representing a single zone. The most common global operations are descriptive statistics for the entire raster dataset such as the minimum or maximum.
 
+```{r}
+cellStats(elev, min)
+cellStats(elev, max)
+cellStats(elev, sd)
+```
+
+--
+
+Further reading: [https://geocompr.robinlovelace.net/spatial-operations.html#spatial-ras](https://geocompr.robinlovelace.net/spatial-operations.html#spatial-ras)
 ---
+
+# Your turn
+
+- Attach `data("dem", package = "RQGIS")`. Retrieve the altitudinal values of the 10th row.
+- Sample randomly 10 coordinates of `dem` with the help of the `coordinates()`-command, and extract the corresponding altitudinal values.
+- Attach `data("random_points", package = "RQGIS")` and find the corresponding altitudinal values. Plot altitude against `spri`. 
+- Compute the hillshade of `dem` (hint: `?hillShade`). Overlay the hillshade with `dem` while using an appropriate level of transparency.
+---
+
 class: inverse, center, middle
 
 # Geometric operations on raster data
 ---
 
-
 # Intersecting geometry
-If you want the intersecting geometry instead of the values, set the the `drop`-parameter to `FALSE`:
+If you want the intersecting geometry of two rasters, use the spatial subsetting syntax and set the `drop`-parameter to `FALSE`.
 --
 
-```{r}
+.pull-left[
+```{r, eval=FALSE}
 elev[clip, drop = FALSE]
 ```
+]
+
+.pull-right[
+```{r, echo=FALSE}
+plot(elev[clip, drop = FALSE], legend = FALSE)
+plot(rasterToPolygons(clip), add = TRUE)
+``` 
+]
 
 ---
 
@@ -238,9 +298,23 @@ plot(elev_agg)
 ]
 ---
 
-# Reprojecting a raster
-projectRaster
+# Changing the CRS of a raster
+- To change the CRS of a raster use `projectRaster()`.
+- EPSG codes are not accepted, use a proj4string instead.
+--
 
+```{r, eval=FALSE}
+library("spDataLarge")
+proj4string(nz_elev)
+projectRaster(nz_elev, crs = st_crs(4326)$proj4string)
+```
+--
+
+Further reading on geometric raster operations: [https://geocompr.robinlovelace.net/transform.html#geo-ras](https://geocompr.robinlovelace.net/transform.html#geo-ras)
 ---
 
 # Your turn
+
+- Decrease the resolution of `dem` (`data("dem", package = "RQGIS")`) by a factor of 10. Plot the result.
+- Reproject `dem` into WGS84. Plot the output next to the original object.
+- Randomly select three points of `random_points` (`data("random_points", package = "RQGIS")`). Convert these into a polygon (hint: `st_cast`). Extract all altitudinal values falling inside the created polygon Use the polygon to clip `dem`. What is the difference between `intersect` and `mask`. Hint: `sf` objects might not work as well with **raster** commands as `SpatialObjects`. Assuming your polygon of class `sf` is named `poly`, convert it into a `SpatialObject` with `as(sf_object, "Spatial`)`.
