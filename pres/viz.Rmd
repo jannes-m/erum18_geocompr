@@ -1,0 +1,95 @@
+---
+title: "Tutorial: Making maps with R"
+subtitle: "`r emojifont::emoji('framed_picture')` <br/>from beige papyrus to shiny tmaps!"
+author: "Jannes Muenchow, Robin Lovelace"
+date: "ERUM Budapest, 2018-05-14"
+output:
+  xaringan::moon_reader:
+    css: "my-theme.css"
+    seal: true
+    lib_dir: libs
+    nature:
+#      highlightStyle: dracula
+      highlightLines: true
+      ratio: '4:3'
+      countIncrementalSlides: false
+bibliography: ../references.bib
+---
+
+
+```{r setup, include = FALSE}
+options(htmltools.dir.version = FALSE)
+library(RefManageR)
+BibOptions(check.entries = FALSE, 
+           bib.style = "authoryear", 
+           cite.style = 'alphabetic', 
+           style = "markdown",
+           first.inits = FALSE,
+           hyperlink = FALSE, 
+           dashed = FALSE)
+my_bib = ReadBib("references.bib", check = FALSE)
+```
+
+layout: true
+background-image: url(img/r_geocomp_background.png)
+background-size: cover
+
+---
+
+# A brief history of geographic vizualisation
+
+---
+
+
+# A brief history of geographic data viz in R
+
+---
+
+# tmap
+
+--- 
+
+# tmap basics
+
+---
+
+# tmap objects
+
+---
+
+# Aesthetics
+
+---
+
+# Colors
+
+---
+
+# Layouts
+
+---
+
+# Facets
+
+---
+
+# Animations
+
+---
+
+# Interactive maps with mapview
+
+---
+
+# Interactive maps with leaflet
+
+---
+
+# Shiny maps
+
+---
+
+
+class: small
+# References
+
