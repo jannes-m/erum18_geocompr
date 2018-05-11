@@ -81,7 +81,7 @@ For this we create two polygons using the `sf`-package.
 .pull-left[
 .smaller-code-font60[
 ```{r, eval = FALSE, message = FALSE}
-library("sf")
+library(sf)
 coords_1 =  
   matrix(data =
            c(0, 0, 1, 0, 1, 1,0, 1, 0, 0),
@@ -106,7 +106,7 @@ plot(poly_2$geometry, add = TRUE)
 
 .pull-right[
 ```{r, echo = FALSE, message = FALSE}
-library("sf")
+library(sf)
 coords_1 =  
   matrix(data = c(0, 0, 1, 0, 1, 1, 0, 1, 0, 0),
          ncol = 2, byrow = TRUE)
@@ -136,7 +136,7 @@ st_sf(geometry = st_sfc(st_polygon(list(coords_1)), st_polygon(list(coords_2))))
 # Find a QGIS algorithm
 Now we would like to know which QGIS geoalgorithm we can use for this task. We assume that the word `intersec` will be part of the short description of the searched geoalgorithm
 ```{r, message = FALSE}
-library("RQGIS")
+library(RQGIS)
 set_env(dev = FALSE)
 find_algorithms("intersec", name_only = TRUE)
 ```
@@ -213,7 +213,7 @@ params[1:10]
 ```
 
 ```{r, eval = TRUE, echo = FALSE}
-library("RQGIS")
+library(RQGIS)
 params = get_args_man(alg = "grass7:r.slope.aspect")
 ```
 
@@ -237,7 +237,7 @@ params[6:10]
 By the way, use `open_help` to access the online help and possibly find out more about a specific geoalgorithm:
 
 ```{r, eval = FALSE}
-library("RQGIS")
+library(RQGIS)
 open_help(alg = "grass7:r.slope.aspect")
 ```
 
