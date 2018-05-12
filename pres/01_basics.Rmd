@@ -103,7 +103,7 @@ dev.off()
 <img align="right" src="img/globe.png" width = "60%", height = "60%"/>
 </figure>
 
-- [Jannes Muenchow](http://www.geographie.uni-jena.de/en/Muenchow.html) - GIScientist from Jena with a special focus on ecology and landsliding; creator of the **RQGIS** package
+- [Jannes Muenchow](http://www.geographie.uni-jena.de/en/Muenchow.html) - GIScientist from Jena with a special focus on ecology, landsliding and geomarketing; creator of the **RQGIS** package
 --
 
 - [Robin Lovelace](https://www.robinlovelace.net/) - Geographer and Environmental Scientist focussing on sustainable transport planning; creator of **stplanr**
