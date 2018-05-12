@@ -318,3 +318,11 @@ Further reading on geometric raster operations: [https://geocompr.robinlovelace.
 - Decrease the resolution of `dem` (`data("dem", package = "RQGIS")`) by a factor of 10. Plot the result.
 - Reproject `dem` into WGS84. Plot the output next to the original object.
 - Randomly select three points of `random_points` (`data("random_points", package = "RQGIS")`). Convert these into a polygon (hint: `st_cast`). Extract all altitudinal values falling inside the created polygon Use the polygon to clip `dem`. What is the difference between `intersect` and `mask`. Hint: `sf` objects might not work as well with **raster** commands as `SpatialObjects`. Assuming your polygon of class `sf` is named `poly`, convert it into a `SpatialObject` with `as(sf_object, "Spatial`)`.
+
+# Recap
+
+We learned about:
+
+- raster attribute operations
+- spatial raster operations
+- geometric raster operations
