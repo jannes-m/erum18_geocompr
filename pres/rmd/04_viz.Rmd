@@ -1,6 +1,6 @@
 ---
 title: "Tutorial: Making maps with R"
-subtitle: "`r emojifont::emoji('framed_picture')` <br/>from beige papyrus to shiny tmaps!"
+subtitle: "`r emojifont::emoji('framed_picture')` <br/>from base to shiny"
 author: "Jannes Muenchow, Robin Lovelace"
 date: "ERUM Budapest, 2018-05-14"
 output:
@@ -13,6 +13,7 @@ output:
       highlightLines: true
       ratio: '4:3'
       countIncrementalSlides: false
+bibliography: viz-references.bib
 ---
 
 
@@ -26,7 +27,10 @@ BibOptions(check.entries = FALSE,
            first.inits = FALSE,
            hyperlink = FALSE, 
            dashed = FALSE)
-my_bib = ReadBib("references.bib", check = FALSE)
+if(dir.exists("pres"))
+  f_ref = "pres/rmd/viz-references.bib" else
+    f_ref = "viz-references.bib"
+my_bib = ReadBib(f_ref, check = FALSE)
 ```
 
 layout: true
@@ -37,10 +41,48 @@ background-size: cover
 
 # A brief history of geographic vizualisation
 
+```{r, echo=FALSE, out.width="70%"}
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/4/48/Hereford-Karte.jpg?download")
+```
+
+
 ---
 
-
 # A brief history of geographic data viz in R
+
+R has "limited interactive [plotting] facilities" `r Citep(my_bib, "bivand_applied_2013", .opts = list(cite.style = "authoryear"))`
+
+---
+
+# R's 'base' graphics
+
+```{r, echo=FALSE}
+library(sp)
+data(meuse)
+coordinates(meuse) = c("x", "y")
+#layout(matrix(1:4, 2, 2, byrow = TRUE))
+layout(matrix(1:4, 1, 4, byrow = TRUE))
+par(mar = c(0,0,1,0))
+plot(meuse, cex = 0.6)
+title("points")
+
+cc = coordinates(meuse)
+m.sl = SpatialLines(list(Lines(list(Line(cc)), "mess")))
+plot(m.sl)
+title("lines")
+
+data(meuse.riv)
+meuse.lst = list(Polygons(list(Polygon(meuse.riv)), "meuse.riv"))
+meuse.pol = SpatialPolygons(meuse.lst)
+plot(meuse.pol, col = "grey")
+title("polygons")
+
+data(meuse.grid)
+coordinates(meuse.grid) = c("x", "y")
+meuse.grid <- as(meuse.grid, "SpatialPixels")
+image(meuse.grid, col = "grey")
+title("grid")
+```
 
 ---
 
@@ -92,3 +134,6 @@ background-size: cover
 class: small
 # References
 
+```{r, 'refs', results="asis", echo=FALSE}
+PrintBibliography(my_bib)
+```
