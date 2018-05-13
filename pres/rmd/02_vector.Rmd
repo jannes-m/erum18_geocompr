@@ -28,6 +28,19 @@ background-size: cover
 <br>
 https://github.com/jannes-m/erum18_geocompr
 
+<br>
+<br>
+Please install following packages:
+```{r, eval=FALSE}
+install.packages(c("sf", "raster", "spData", "dplyr", "RQGIS"))
+```
+
+Or from [docker](https://github.com/Robinlovelace/geocompr#running-the-book-in-docker):
+
+```
+docker run -d -p 8787:8787 -v ${pwd}:/data robinlovelace/geocompr
+```
+
 ---
 class: inverse, center, middle
 
@@ -36,7 +49,7 @@ class: inverse, center, middle
 ---
 
 # Simple features in R
-Simple feature access is a widely used [ISO standard](http://www.opengeospatial.org/standards/sfa).
+Simple feature access is a widely used [ISO standard](http://www.opengeospatial.org/standards/sfa). Edzer Pebesma implemented simple features in R via the **sf** package.
 --
 
 ```{r}
