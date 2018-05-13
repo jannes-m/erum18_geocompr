@@ -2,7 +2,7 @@
 title: "Tutorial: Making maps with R"
 subtitle: "`r emojifont::emoji('world_map')` <br/>from base (rock) to shiny (clouds)"
 author: "Jannes Muenchow, Robin Lovelace"
-date: "ERUM Budapest, 2018-05-14"
+date: "eRum Budapest, 2018-05-14"
 output:
   xaringan::moon_reader:
     css: "my-theme.css"
@@ -189,18 +189,25 @@ plot(st_geometry(nz), col = as.character(nz$col))
 ```{r, eval=FALSE}
 # facet plots by default
 plot(nz) 
-
 # plot just geometry, ready for new layers:
 plot(st_geometry(nz), reset = FALSE)
-
 # addition of new layers
 plot(nz_height, add = TRUE)
-
+# transparency
 sf_cols = sf.colors(n = 2, alpha = 0.2)
 nz$col = factor(x = nz$Island, labels = sf_cols)
 plot(st_geometry(nz), col = as.character(nz$col))
 #  see ?plot.sf for more
 ```
+
+--
+
+## Observations
+
+- Facets by default: useful for seeing patterns
+- Transparency new, `add = ...` argument the same
+- You can go far with base R graphics 
+`r Citep(my_bib, "murrell_graphics_2016", .opts = list(cite.style = "authoryear"))`.
 
 ---
 
@@ -228,43 +235,71 @@ tm_shape(nz) +
 
 --
 
-- It's also at ERUM!
+- It's also at eRum!
+- At 13:30 in room N15 203: "Plotting spatial data in R"
 
 ---
 
 # tmap basics
 
----
+```{r, fig.cap="tmap basics", out.width="32%", fig.show='hold'}
+# Add fill layer to nz shape
+tm_shape(nz) + tm_fill() 
+# Add border layer to nz shape
+tm_shape(nz) + tm_borders() 
+# Add fill and border layers to nz shape
+tm_shape(nz) + tm_fill() + tm_borders() 
+```
 
-# tmap objects
+<!-- --- -->
 
----
+<!-- # tmap objects -->
 
-# Aesthetics
+<!-- --- -->
 
----
+<!-- # Aesthetics -->
 
-# Layouts
+<!-- --- -->
 
----
+<!-- # Layouts -->
 
-# Facets
+<!-- --- -->
+
+<!-- # Facets -->
+
+<!-- --- -->
 
 ---
 
 # Animations
 
+- Are easy with **tmap** (section [9.3](http://geocompr.robinlovelace.net/adv-map.html#animated-maps) of geocompr)
+
+```{r, echo=FALSE, out.width="80%"}
+knitr::include_graphics("https://user-images.githubusercontent.com/1825120/38543030-5794b6f0-3c9b-11e8-9da9-10ec1f3ea726.gif")
+```
+
 ---
 
 # Interactive maps with mapview
 
----
-
-# Interactive maps with leaflet
+```{r}
+m = mapview::mapview(nz)
+m@map
+```
 
 ---
 
 # Web mapping applications
+
+- Leaflet integrates with **shiny** via `leaflet::leafletOutput()`, enabling web mapping applications built on R
+- These can be set-up to scale nationally, as illustrated by [pct.bike](http://www.pct.bike/)
+`r Citep(my_bib, "lovelace_propensity_2017", .opts = list(cite.style = "authoryear"))`.
+
+
+```{r, echo=FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/npct/pct-team/master/figures/pct-frontpage.png")
+```
 
 ---
 
@@ -293,6 +328,7 @@ africa = world %>%
 
 ---
 
+class: small
 # References
 
 ```{r, 'refs', results="asis", echo=FALSE}
