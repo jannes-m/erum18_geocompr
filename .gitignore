@@ -2,7 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
-raw
+pptx
 libs
 *html
 solutions
+convert_html_to_pdf.R
+decktape-1.0.0
