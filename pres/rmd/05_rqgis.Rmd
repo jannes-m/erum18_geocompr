@@ -343,6 +343,14 @@ plot(int$geometry, col = "lightblue",
 
 ---
 
+# Further reading
+
+<br>
+<br>
+<br>
+[https://geocompr.robinlovelace.net/gis.html](https://geocompr.robinlovelace.net/gis.html)
+---
+
 # Your turn
 
 1. Let us (together) reproduce the `qgis:intersection` example (download code).
