@@ -358,6 +358,27 @@ A geographic CRS uses a grid that wraps around the entire globe. This means that
 - Great for locating a place on Earth
 - Best for global analysis
 - Less suitable if you want to measure distance
+]
+
+
+
+.pull-right[
+<img  src="https://geocompr.robinlovelace.net/figures/vector_lonlat.png" width = "90%", height = "90%"/>
+<figcaption >Source: <a href="https://geocompr.robinlovelace.net/spatial-class.html">Geocomputation with R</a>.</figcaption>
+ </figure>
+ ]
+
+???
+difference 1 decimal degree at the equator and at the poles
+---
+# Geographic CRS
+
+.pull-left[
+- Usually in decimal degrees
+- Used by many people/institutions (GPS)
+- Great for locating a place on Earth
+- Best for global analysis
+- Less suitable if you want to measure distance
 - Heavily distorted towards the poles
 
 ]
@@ -376,6 +397,7 @@ plot(st_geometry(st_graticule(world)), add = TRUE)
 ???
 difference 1 decimal degree at the equator and at the poles
 ---
+
 
 # Projected CRS
 - Spatial projections flatten the 3D shape of the Earth onto a 2D plane
@@ -398,6 +420,9 @@ Further reading:
 - [Gecomputation with R - Projections](https://geocompr.robinlovelace.net/transform.html#reproj-geo-data)
 - [QGIS CRS documentation](https://docs.qgis.org/2.14/en/docs/gentle_gis_introduction/coordinate_reference_systems.html)
 - [Earth Data Science CRS](https://earthdatascience.org/courses/earth-analytics/spatial-data-r/intro-to-coordinate-reference-systems/)
+
+???
+conic, azimuthal and cylindrical projections
 ---
 class: inverse, center, middle
 
