@@ -39,12 +39,35 @@ background-size: cover
 
 ---
 
-# A brief history of geographic vizualisation
+# A brief history of geographic vizualisation I
+
+- Neo Babylonian (626 BC - 539 BC) temple plan
+Source:
+`r Citep(my_bib, "talbert_ancient_2014", .opts = list(cite.style = "authoryear"))`
+
+```{r, echo=FALSE, out.width="70%"}
+knitr::include_graphics("img/neo-babylon-temple-map-circa-600-bc.png")
+```
+
+---
+
+# A brief history of geographic vizualisation II
+
+- Late Babylonian (1000 BC - 606 BC) map of the world
+Source:
+`r Citep(my_bib, "talbert_ancient_2014", .opts = list(cite.style = "authoryear"))`
+
+```{r, echo=FALSE, out.width="70%"}
+knitr::include_graphics("img/babylon-map.png")
+```
+
+---
+
+# A brief history of geographic vizualisation I
 
 ```{r, echo=FALSE, out.width="70%"}
 knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/4/48/Hereford-Karte.jpg?download")
 ```
-
 
 ---
 
@@ -85,6 +108,32 @@ title("grid")
 ```
 
 ---
+
+# Base R graphics code
+
+```{r, eval=FALSE}
+library(sp)
+data(meuse)
+coordinates(meuse) = c("x", "y")
+plot(meuse, cex = 0.6)
+title("points")
+data(meuse.riv)
+meuse.lst = list(Polygons(list(Polygon(meuse.riv)), "meuse.riv"))
+meuse.pol = SpatialPolygons(meuse.lst)
+plot(meuse.pol, col = "grey", add = TRUE)
+```
+
+--
+
+## Observations
+
+- Passes arguments (e.g `cex` for symbol size) to `graphics::plot()`
+- New command for each additional 'layer' (e.g. `title()`, `plot(..., add = TRUE)`)
+- Black and white default output style
+- Fast
+
+---
+
 
 # tmap
 
