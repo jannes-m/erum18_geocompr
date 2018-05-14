@@ -53,7 +53,7 @@ knitr::include_graphics("img/neo-babylon-temple-map-circa-600-bc.png")
 
 # A brief history of geographic vizualisation II
 
-- Late Babylonian (1000 BC - 606 BC) map of the world
+- Neo Babylonian (626 BC - 539 BC) map of the world
 Source:
 `r Citep(my_bib, "talbert_ancient_2014", .opts = list(cite.style = "authoryear"))`
 
@@ -65,11 +65,15 @@ knitr::include_graphics("img/babylon-map.png")
 
 # A brief history of geographic vizualisation III
 
-- The mappa mundi - largest Mediaval map surviving (~1300 **AD**)
+- Humboldt's Naturgemälde (1807, *Geography of Plants*)
 
-```{r, echo=FALSE, out.width="50%"}
-knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/4/48/Hereford-Karte.jpg?download")
+```{r, echo=FALSE}
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Zentralbibliothek_Z%C3%BCrich_-_Ideen_zu_einer_Geographie_der_Pflanzen_nebst_einem_Naturgem%C3%A4lde_der_Tropenl%C3%A4nder_-_000012142.jpg/2560px-Zentralbibliothek_Z%C3%BCrich_-_Ideen_zu_einer_Geographie_der_Pflanzen_nebst_einem_Naturgem%C3%A4lde_der_Tropenl%C3%A4nder_-_000012142.jpg")
 ```
+
+
+<!-- - The mappa mundi - largest Mediaval map surviving (~1300 **AD**) -->
+<!-- knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/4/48/Hereford-Karte.jpg?download") -->
 
 ---
 
