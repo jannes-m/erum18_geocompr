@@ -86,8 +86,8 @@ st_join(nz, select(nz_height, elevation), left = FALSE)
 pts = st_sfc(st_point(c(0, 1)), st_point(c(1, 1))) # create 2 points
 # use the buffer function to create circles from points
 circles = st_buffer(pts, dist = 1) 
-x = circles[1, ]
-y = circles[2, ]
+x = circles[1]
+y = circles[2]
 # intersection
 int = st_intersection(x, y)
 plot(circles)
