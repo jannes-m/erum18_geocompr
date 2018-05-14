@@ -127,7 +127,7 @@ image(meuse.grid, col = "grey")
 title("grid")
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library(sp)
 library(sf)
 library(spData)
@@ -208,8 +208,8 @@ plot(st_geometry(nz), col = as.character(nz$col))
 
 ## Observations
 
-- Facets by default: useful for seeing patterns
-- Transparency new, `add = ...` argument the same
+- Facets by default: useful for seeing patterns.
+- Transparency new, `add = ...` argument the sam.e
 - You can go far with base R graphics 
 `r Citep(my_bib, "murrell_graphics_2016", .opts = list(cite.style = "authoryear"))`.
 
@@ -232,7 +232,7 @@ tm_shape(nz) +
 - It is powerful and flexible.
 - Concise syntax, attractive maps with minimal code, familiar to **ggplot2** users.
 - Unique capability: same code -> static + interactive maps with switch `tmap_mode()`.
-- Wide range of spatial classes (including `raster` objects) supported
+- Wide range of spatial classes (including `raster` objects) supported.
 - Well documented + developed --- see [`tmap-nutshell`](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-nutshell.html) and JSS paper
 `r Citep(my_bib, "tennekes_tmap_2018", .opts = list(cite.style = "authoryear"))`.
 
@@ -240,7 +240,7 @@ tm_shape(nz) +
 --
 
 - It's also at eRum!
-- At 13:30 in room N15 203: "Plotting spatial data in R"
+- At 13:30 in room N15 203: "Plotting spatial data in R".
 
 ---
 
