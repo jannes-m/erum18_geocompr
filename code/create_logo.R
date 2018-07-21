@@ -25,6 +25,12 @@ library(gridExtra)
 # attach data
 rlogo = brick("pres/img/Rlogo.tif")
 
+# create hexagon
+# https://github.com/mkearney/hexagon
+library(hexagon)
+hex_1 = hexdf()
+plot(hex_1, type = "l")
+
 #**********************************************************
 # 2 CREATE LOGO--------------------------------------------
 #**********************************************************
